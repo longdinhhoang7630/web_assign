@@ -31,30 +31,13 @@
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#homeSubmenu">Home</a>
+                    <a href="index.php?page=def">Home</a>
                 </li>
                 <li>
-                    <a href="#">About</a>
+                    <a href="index.php?page=listQuiz">Quiz List</a>
                 </li>
                 <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a href="#">Page 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 3</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Portfolio</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
+                    <a href="index.php?page=quizRecord">Quiz Record</a>
                 </li>
             </ul>
         </nav>
@@ -97,6 +80,12 @@
                         break;
                     case 'reset':
                         include 'reset-password.php';
+                        break;
+                    case 'listQuiz':
+                        include 'listQuiz.php';
+                        break;
+                    case 'newQuiz':
+                        include 'newQuiz.php';
                         break;
                     default:
                         include 'notfound.php';
