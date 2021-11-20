@@ -1,6 +1,6 @@
 <?php
    require_once('connection.php');
-
+   require_once('./authen_teacher.php');
    function get_product($conn , $term){	
       $query = "SELECT * FROM products WHERE LOWER(product_name) LIKE '%".$term."%' ORDER BY product_name ASC";
       $result = mysqli_query($conn, $query);	
@@ -16,4 +16,3 @@
       }
       echo json_encode($productList);
    }
-?>

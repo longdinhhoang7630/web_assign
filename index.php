@@ -1,7 +1,8 @@
 <?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
-<head> 
+
+<head>
     <title>My first website</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,38 +16,49 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" />
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <link href="myStyle.css" rel="stylesheet" type="text/css" media="all">
-    <link rel="icon" href="image/logo.svg" sizes="96x96"/>	
+    <link rel="icon" href="image/logo.svg" sizes="96x96" />
 </head>
-<body>
-	<div class="head">
-	  <img id="logo" src = "image/logo.svg" alt="Logo"/>
-	  <h1 class="myh1">Ho Chi Minh City University of Technology <br>
-        <p>VIETNAM NATIONAL UNIVERSITY - HO CHI MINH</p>
-      </h1>
-      <br>
-	</div>  
 
-	<div class="w3-bar w3-indigo w3-card">
-		<a style="text-decoration: none;" href="index.php?page=home#about" class="w3-bar-item w3-button w3-padding-16 w3-hover-teal">
+<body>
+    <?php
+    if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
+        if ($_SESSION['role'] == 'admin') {
+            header("location: admin/");
+            exit;
+        } elseif ($_SESSION['role'] == 'teacher') {
+            header("location: teacher/");
+            exit;
+        } elseif ($_SESSION['role'] == 'student') {
+            header("location: student/");
+            exit;
+        }
+    }
+    ?>
+    <div class="head">
+        <img id="logo" src="image/logo.svg" alt="Logo" />
+        <h1 class="myh1">Ho Chi Minh City University of Technology <br>
+            <p>VIETNAM NATIONAL UNIVERSITY - HO CHI MINH</p>
+        </h1>
+        <br>
+    </div>
+
+    <div class="w3-bar w3-indigo w3-card">
+        <a style="text-decoration: none;" href="index.php?page=home#about" class="w3-bar-item w3-button w3-padding-16 w3-hover-teal">
             <i class="fa fa-fw fa-home"></i> Home
-        </a> 
+        </a>
 
         <a style="text-decoration: none;" href="#contact" class="w3-bar-item w3-button w3-padding-16 w3-hover-teal">
             <i class="fa fa-fw fa-book"></i> Contact
         </a>
-        
-        <a style="text-decoration: none;" class="w3-bar-item w3-button w3-padding-16 w3-hover-teal w3-right" 
-            onclick="document.getElementById('id01').style.display='block'"
-            href="index.php?page=login#id01" style="width:auto;">
-            <i class="fa fa-fw fa-sign-in"></i> Login
-        </a> 
 
-        <a style="text-decoration: none;" class="w3-bar-item w3-button w3-padding-16 w3-hover-teal w3-right" 
-            onclick="document.getElementById('id02').style.display='block'"
-            href="index.php?page=register#id02" style="width:auto;">
+        <a style="text-decoration: none;" class="w3-bar-item w3-button w3-padding-16 w3-hover-teal w3-right" onclick="document.getElementById('id01').style.display='block'" href="index.php?page=login#id01" style="width:auto;">
+            <i class="fa fa-fw fa-sign-in"></i> Login
+        </a>
+
+        <a style="text-decoration: none;" class="w3-bar-item w3-button w3-padding-16 w3-hover-teal w3-right" onclick="document.getElementById('id02').style.display='block'" href="index.php?page=register#id02" style="width:auto;">
             <i class="fa fa-fw fa-user-plus"></i> Sign up
         </a>
-	</div>
+    </div>
     <div id="myCarousel" class="carousel slide">
         <!-- Indicators -->
         <ul class="carousel-indicators">
@@ -58,42 +70,42 @@
             <div class="carousel-item active">
                 <img src="image/bk1.jpg" style="width:100%">
             </div>
-            
+
             <div class="carousel-item">
                 <img src="image/bk3.jpg" style="width:100%; height: 700px;">
             </div>
-            
+
             <div class="carousel-item">
                 <img src="image/bk4.jpg" style="width:100%;height: 700px;">
             </div>
-        </div>  
+        </div>
         <!-- Left and right controls -->
         <a class="carousel-control-prev" href="#myCarousel">
             <span class="carousel-control-prev-icon"></span>
         </a>
         <a class="carousel-control-next" href="#myCarousel">
             <span class="carousel-control-next-icon"></span>
-        </a> 
+        </a>
     </div>
     <?php
-        if(array_key_exists('page',$_GET)){
-            switch($_GET['page']){
-                case 'home':
-                    include 'home.php';
-                    break;
-                case 'login': 
-                    include 'login.php';
-                    break;  
-                case 'register':    
-                    include 'register.php';
-                    break;
-                default:
-                    include 'notfound.php';
-                    break;
-            }
-        }else {
-            include 'home.php';
-        } 
+    if (array_key_exists('page', $_GET)) {
+        switch ($_GET['page']) {
+            case 'home':
+                include 'home.php';
+                break;
+            case 'login':
+                include 'login.php';
+                break;
+            case 'register':
+                include 'register.php';
+                break;
+            default:
+                include 'notfound.php';
+                break;
+        }
+    } else {
+        include 'home.php';
+    }
     ?>
     <!-- The Contact Section -->
     <footer class="w3-padding-32 w3-center w3-pale-blue">
@@ -110,20 +122,16 @@
                     <i class="fa fa-envelope" style="width:30px; color:darkblue;"> </i> Email: admission@oisp.edu.vn<br>
                 </div>
                 <div class="w3-col m6 w3-xlarge w3-margin-bottom w3-right-align">
-                    <a class="fa fa-facebook-official" style="color:darkblue;"
-                    href="https://www.facebook.com/truongdhbachkhoa/">
+                    <a class="fa fa-facebook-official" style="color:darkblue;" href="https://www.facebook.com/truongdhbachkhoa/">
                     </a>
-                    <a class="fa fa-instagram" style="color:rgb(170, 145, 34);"
-                    href="https://www.instagram.com/truongdaihocbachkhoa.1957/?fbclid=IwAR23WtLTFk3UbcukkHukY-8B8EwSqxTb8Dfx8D5pKUGB8gCKTLhs2Y7MHQo">
+                    <a class="fa fa-instagram" style="color:rgb(170, 145, 34);" href="https://www.instagram.com/truongdaihocbachkhoa.1957/?fbclid=IwAR23WtLTFk3UbcukkHukY-8B8EwSqxTb8Dfx8D5pKUGB8gCKTLhs2Y7MHQo">
                     </a>
-                    <a class="fa fa-youtube-play" style="color:red;"
-                    href ="https://www.youtube.com/channel/UCl4zLzbk82yGnpRDNTaYKow/featured">
+                    <a class="fa fa-youtube-play" style="color:red;" href="https://www.youtube.com/channel/UCl4zLzbk82yGnpRDNTaYKow/featured">
                     </a>
                     <a class="fa fa-pinterest-p" style="color:darkmagenta;"></a>
                     <a class="fa fa-twitter" style="color:blue;"></a>
                     <p class="w3-large">For more information please visit
-                        <a href="https://oisp.hcmut.edu.vn/en/" 
-                        style="color:darkgreen;" target="_blank">this
+                        <a href="https://oisp.hcmut.edu.vn/en/" style="color:darkgreen;" target="_blank">this
                         </a>
                         website
                     </p>
@@ -135,4 +143,5 @@
     <a id="backtotop" onclick="topFunction()" title="Go to top"><i class="fa fa-fw fa-chevron-up"></i></a>
     <script src="myScript.js"></script>
 </body>
+
 </html>

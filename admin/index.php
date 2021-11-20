@@ -24,6 +24,12 @@ include 'session.php';
 </head>
 
 <body>
+    <?php
+    if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION['role'] !== 'admin') {
+        header("location: ../index.php");
+        exit;
+    }
+    ?>
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">

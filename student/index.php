@@ -1,6 +1,7 @@
 <?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
+<?php require_once './authen_student.php'; ?>
 
 <head>
     <title>My first website</title>
@@ -23,6 +24,12 @@
 </head>
 
 <body>
+    <?php
+    if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION['role'] !== 'student') {
+        header("location: ../index.php");
+        exit;
+    }
+    ?>
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
@@ -99,9 +106,9 @@
                     case 'quiz':
                         include 'quiz_search.php';
                         break;
-                    // case 'do_quiz':
-                    //     include 'do_quiz.php';
-                    //     break;
+                        // case 'do_quiz':
+                        //     include 'do_quiz.php';
+                        //     break;
                     case 'reset':
                         include 'reset-password.php';
                         break;

@@ -1,6 +1,6 @@
 <?php
 require_once '../connection.php';
-$valueToSearch = $_POST['searchword'];
+require_once './authen_student.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
    if (!empty($valueToSearch)) {
       $query = "SELECT examID,exName,username,topic,diff_level,exam.createDay FROM exam join account on (accountID = teacherID) WHERE LOWER(exName) LIKE '%" . $valueToSearch . "%' or LOWER(username) LIKE '%" . $valueToSearch . "%' 
@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php } else {
          echo "<br>";
          $_SESSION["error"] = "No result found for:" . ' "' . $valueToSearch . '"';
-         echo '<p class="mb-4">'.$_SESSION["error"].'</p>';
+         echo '<p class="mb-4">' . $_SESSION["error"] . '</p>';
       }
    }
 }

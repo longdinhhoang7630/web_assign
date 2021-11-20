@@ -1,3 +1,4 @@
+<?php require_once './authen_student.php'; ?>
 <div id="id05">
   <form class="animate" action="./resetpass_process.php" method="post">
     <div class="imgcontainer">

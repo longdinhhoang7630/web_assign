@@ -23,6 +23,9 @@
 </head>
 
 <body>
+    <?php
+    require_once('./authen_teacher.php');
+    ?>
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
@@ -84,8 +87,8 @@
                     case 'listQuiz':
                         include 'listQuiz.php';
                         break;
-                    case 'newQuiz':
-                        include 'newQuiz.php';
+                    case 'new_question':
+                        include 'new_question.php';
                         break;
                     default:
                         include 'notfound.php';

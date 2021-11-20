@@ -1,6 +1,6 @@
 <?php
 require_once('../connection.php');
-
+require_once('./authen_teacher.php');
 ?>
 
 <head>
@@ -60,7 +60,7 @@ require_once('../connection.php');
                <h4 class="modal-title" id="myModallabel">Add New quiz</h4>
                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
-            <form method='post' id='quiz-frm' action ='./save_quiz.php'>
+            <form method='post' id='quiz-frm' action='./save_quiz.php'>
                <div class="modal-body">
                   <div id="msg"></div>
                   <div class="form-group">

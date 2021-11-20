@@ -1,7 +1,8 @@
 <?php
 session_start();
 require_once('../connection.php');
-$getID= $_SESSION['id'];
+require_once('./authen_teacher.php');
+$getID = $_SESSION['id'];
 function test_input($data)
 {
    $data = trim($data);
@@ -9,7 +10,7 @@ function test_input($data)
    $data = htmlspecialchars($data);
    return $data;
 }
-$testnameErr='';
+$testnameErr = '';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $testname = test_input($_POST['testname']);
    $topic = test_input($_POST['topic']);
@@ -22,12 +23,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       header("location: index.php?page=listQuiz");
       exit;
    }
-   if(empty($testnameErr)){
+   if (empty($testnameErr)) {
       $sql = "INSERT INTO exam (teacherID,exName,topic,diff_level) VALUES ('$getID','$testname','$topic','$diff')";
       if (mysqli_query($conn, $sql)) {
          $_SESSION['testname'] = $testname;
-         header("location: index.php?page=newQuiz");
-      }else{
+         header("location: index.php?page=new_question");
+      } else {
          echo "<script language='javascript'>
                   alert('Failed to add new quiz');
                   window.location='index.php?page=listQuiz';
@@ -38,5 +39,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       }
    }
 }
-
-?>

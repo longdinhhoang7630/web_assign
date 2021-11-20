@@ -2,6 +2,7 @@
 session_start();
 include 'header.php';
 require_once '../connection.php';
+require_once './authen_student.php';
 $quizID = $_GET['id'];
 // Check if the user is logged in, otherwise redirect to login page
 // if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION['role']!=='student') {

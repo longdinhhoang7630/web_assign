@@ -1,3 +1,18 @@
+<?php
+if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
+  var_dump($_SESSION['role']);
+  if ($_SESSION['role'] == 'admin') {
+    header("location: ./admin/");
+    exit;
+  } elseif ($_SESSION['role'] == 'teacher') {
+    header("location: ./teacher/");
+    exit;
+  } elseif ($_SESSION['role'] == 'student') {
+    header("location: ./student/");
+    exit;
+  }
+}
+?>
 <div id="id01" class="myModal">
   <form autocomplete="off" class="myContent animate" action="./login_processing.php" method="post">
     <div class="imgcontainer">

@@ -1,5 +1,6 @@
 <?php
 require_once('../connection.php');
+require_once './authen_student.php';
 $query = "SELECT examID,exName,username,topic,diff_level,exam.createDay FROM exam join account on (accountID = teacherID)  order by exam.createDay desc limit 5;";
 $records = mysqli_query($conn, $query); // fetch data from database
 if (mysqli_num_rows($records) > 0) { ?>

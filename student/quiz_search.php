@@ -1,4 +1,5 @@
 <!-- Begin Page Content -->
+<?php require_once './authen_student.php'; ?>
 <div class="container-fluid">
    <!-- Page Heading -->
    <form class="form-inline mr-auto w-100 navbar-search" action="./index.php" method="post">

@@ -1,3 +1,4 @@
+<?php require_once './authen_student.php'; ?>
 <div id="id03" class="modal">
 <form class="modal-content animate" action="./index.php#showPro" method="post">
   <div class="imgcontainer">

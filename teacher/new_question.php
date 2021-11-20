@@ -2,6 +2,7 @@
 // session_start();
 require_once('../connection.php');
 $quizname = $_SESSION['testname'];
+require_once('./authen_teacher.php');
 ?>
 
 <head>
@@ -23,13 +24,10 @@ $quizname = $_SESSION['testname'];
          <div class="card-body">
             <ul class="list-group">
                <?php
-               $sql= "SELECT examID FROM exam WHERE exName= '.$quizname.'";
                $query = "SELECT * FROM (question join exam_content on (questID = questionID)) 
-               join exam on (examID = exID) WHERE exName= '.$quizname.' order by questID asc ";
+               join exam on (examID = exID) WHERE exName= '$quizname' order by questID asc ";
                $records = mysqli_query($conn, $query);
                if (mysqli_num_rows($records) > 0) {
-                  $data1 = mysqli_fetch_assoc($records);
-                  $_SESSION['exid'] = $data1['exID'];
                   while ($data = mysqli_fetch_assoc($records)) { ?>
                      <li class="list-group-item"><?php echo $data['question'] ?><br>
                         <center>
@@ -38,6 +36,8 @@ $quizname = $_SESSION['testname'];
                         </center>
                      </li>
                <?php  }
+               } else {
+                  echo "No question has been added";
                } ?>
             </ul>
          </div>
@@ -56,7 +56,7 @@ $quizname = $_SESSION['testname'];
                      <div id="msg"></div>
                      <div class="form-group">
                         <label>Question</label>
-                        <textarea rows='3' name="question" required class="form-control"></textarea>
+                        <textarea rows="3" name="questionContent" required class="form-control"></textarea>
                      </div>
                      <label>Options:</label>
                      <div class="form-group">
@@ -77,7 +77,7 @@ $quizname = $_SESSION['testname'];
 
                   </div>
                   <div class="modal-footer">
-                     <input type="submit" class="btn btn-primary" name="save" value="Save">
+                     <button type="submit" class="btn btn-primary" name="submit" value="Submit">Submit</button>
                   </div>
                </form>
             </div>
@@ -141,25 +141,25 @@ $quizname = $_SESSION['testname'];
             })
          }
       })
-      $('#question-frm').submit(function(e) {
-         e.preventDefault();
-         $.ajax({
-            url: './save_question.php',
-            method: 'POST',
-            data: $(this).serialize(),
-            error: err => {
-               console.log(err)
-               alert('An error occured')
-               $('#quiz-frm [name="submit"]').removeAttr('disabled')
-               $('#quiz-frm [name="submit"]').html('Save')
-            },
-            success: function(resp) {
-               if (resp == 1) {
-                  alert('Data successfully saved');
-                  location.reload()
-               }
-            }
-         })
-      })
+      // $('#question-frm').submit(function(e) {
+      //    e.preventDefault();
+      //    $.ajax({
+      //       url: './save_question.php',
+      //       method: 'POST',
+      //       data: $(this).serialize(),
+      //       error: err => {
+      //          console.log(err)
+      //          alert('An error occured')
+      //          $('#quiz-frm [name="submit"]').removeAttr('disabled')
+      //          $('#quiz-frm [name="submit"]').html('Save')
+      //       },
+      //       success: function(resp) {
+      //          if (resp == 1) {
+      //             alert('Data successfully saved');
+      //             location.reload()
+      //          }
+      //       }
+      //    })
+      // })
    })
 </script>
