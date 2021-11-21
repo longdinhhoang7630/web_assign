@@ -11,9 +11,14 @@ function test_input($data)
 }
 $testnameErr = '';
 $testquestion = $ansA = $ansB = $ansC = $ansD = $correctAns = $examID = '';
-$examName =  $_SESSION['testname'];
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['testname'])) {
+   // var_dump($_POST['questionContent']);
+   // var_dump($_POST['ansA']);
+   // var_dump($_POST['ansB']);
+   // var_dump($_POST['ansC']);
+   // var_dump($_SESSION['testname']);
+   $examName =  $_SESSION['testname'];
    if (
       !empty($_POST['questionContent']) && !empty($_POST['ansA'])
       && !empty($_POST['ansB']) && !empty($_POST['ansC'])
