@@ -13,7 +13,10 @@ require_once('./authen_teacher.php');
 
    <div class="container-fluid admin">
       <a data-toggle="modal" data-target="#manage_question" class="btn btn-primary bt-sm" id="new_question">
-         <i class="fa fa-plus"></i> Add Question
+         <i class="fa fa-plus"></i> Add Question <i class="far fa-save"></i>
+      </a>
+      <a href="./index.php?page=listQuiz" class="btn btn-primary bt-sm" id="saveExam">
+         <i class="far fa-save"></i> Save exam
       </a>
       <br>
       <br>
@@ -51,19 +54,19 @@ require_once('./authen_teacher.php');
                   <h4 class="modal-title" id="myModallabel">Add New Question</h4>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                </div>
-               <form id='question-frm' method="post" action="./save_question.php">
+               <form id='question-frm'>
                   <div class="modal-body">
                      <div id="msg"></div>
                      <div class="form-group">
                         <label>Question</label>
-                        <input type="hidden" name="qid" value="<?php echo $_GET['id'] ?>" />
-                        <input type="hidden" name="id" />
+                        <input type="hidden" name="questid" value="" />
+                        <!-- <input type="hidden" name="id" /> -->
                         <textarea rows="3" name="questionContent" required class="form-control"></textarea>
                      </div>
                      <label>Options:</label>
                      <div class="form-group">
                         <textarea rows="2" name="ansA" required class="form-control"></textarea>
-                        <label><input type="radio" name="check" class="is_right" value="A">
+                        <label><input type="radio" name="check" class="is_right" value="A" required>
                            <small>Question Answer</small>
                         </label>
                         <br>
@@ -85,7 +88,7 @@ require_once('./authen_teacher.php');
 
                   </div>
                   <div class="modal-footer">
-                     <button type="submit" class="btn btn-primary" name="submit" value="Submit">Submit</button>
+                     <button class="btn btn-primary" name="save" value="save">Save</button>
                   </div>
                </form>
             </div>
@@ -111,7 +114,7 @@ require_once('./authen_teacher.php');
                console.log(resp)
                if (typeof resp != undefined) {
                   resp = JSON.parse(resp)
-                  $('[name="id"]').val(resp.questID)
+                  $('[name="questid"]').val(resp.questID)
                   $('[name="questionContent"]').val(resp.question)
                   $('[name="ansA"]').val(resp.answerA)
                   $('[name="ansB"]').val(resp.answerB)
@@ -133,25 +136,69 @@ require_once('./authen_teacher.php');
          })
 
       })
+      $('#question-frm').submit(function(e) {
+         e.preventDefault();
+         $('#question-frm [name="submit"]').attr('disabled', true)
+         $('#question-frm [name="submit"]').html('Saving...')
+         $('#msg').html('')
+
+         $.ajax({
+            url: './save_question.php',
+            method: 'POST',
+            data: $(this).serialize(),
+            error: err => {
+               console.log(err)
+               alert('An error occured')
+               $('#quiz-frm [name="submit"]').removeAttr('disabled')
+               $('#quiz-frm [name="submit"]').html('Save')
+            },
+            success: function(resp) {
+               if (resp == 1) {
+                  alert('New question added');
+                  location.reload()
+               } else if (resp == 2) {
+                  alert('Fail to add question');
+                  location.reload()
+               } else if (resp == 3) {
+                  alert('Update question success');
+                  location.reload()
+               } else if (resp == 4) {
+                  alert('Fail to update question');
+                  location.reload()
+               } else {
+                  alert('Field is empty');
+                  location.reload()
+               }
+            }
+         })
+      })
+
       $('.is_right').each(function() {
          $(this).click(function() {
             $('.is_right').prop('checked', false);
             $(this).prop('checked', true);
          })
       })
-      // $('.remove_question').click(function() {
-      //    var id = $(this).attr('data-id')
-      //    var conf = confirm('Are you sure to delete this data.');
-      //    if (conf == true) {
-      //       $.ajax({
-      //          url: './delete_question.php?id=' + id,
-      //          error: err => console.log(err),
-      //          success: function(resp) {
-      //             if (resp == true)
-      //                location.reload()
-      //          }
-      //       })
-      //    }
-      // })
+      $('.remove_question').click(function() {
+         console.log("we here")
+         var id = $(this).attr('data-id')
+         var delay = 3000
+         var conf = confirm('Are you sure to delete this data.');
+         if (conf == true) {
+            $.ajax({
+               url: './delete_question.php?id=' + id,
+               error: err => console.log(err),
+               success: function(resp) {
+                  console.log(resp)
+                  if (resp == true) {
+                     window.alert("Delete question success");
+                     location.reload()
+                  } else {
+                     window.alert("Fail to delete question")
+                  }
+               }
+            })
+         }
+      })
    })
 </script>
