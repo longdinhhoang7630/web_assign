@@ -27,7 +27,6 @@
                             <td><?= $row['topic'] ?></td>
                             <td><?= $row['diff_level'] ?></td>
                             <td><?= $row['createDay'] ?></td>
-
                         </tr>
                 <?php }
                 } ?>
