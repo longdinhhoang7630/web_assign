@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 require_once('../connection.php');
 require_once('./authen_teacher.php');
 $getID = $_SESSION['id'];

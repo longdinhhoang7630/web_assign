@@ -56,8 +56,8 @@ require_once('./authen_teacher.php');
                      <div id="msg"></div>
                      <div class="form-group">
                         <label>Question</label>
-                        <input type="hidden" name="qid" value="<?php echo $_GET['id'] ?>" />
-                        <input type="hidden" name="id" />
+                        <input type="hidden" name="questid" value="" />
+                        <!-- <input type="hidden" name="id" /> -->
                         <textarea rows="3" name="questionContent" required class="form-control"></textarea>
                      </div>
                      <label>Options:</label>
@@ -111,7 +111,7 @@ require_once('./authen_teacher.php');
                console.log(resp)
                if (typeof resp != undefined) {
                   resp = JSON.parse(resp)
-                  $('[name="id"]').val(resp.questID)
+                  $('[name="questid"]').val(resp.questID)
                   $('[name="questionContent"]').val(resp.question)
                   $('[name="ansA"]').val(resp.answerA)
                   $('[name="ansB"]').val(resp.answerB)
