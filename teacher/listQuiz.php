@@ -1,6 +1,6 @@
 <?php
 require_once('../connection.php');
-require_once('./authen_teacher.php');
+// require_once('./authen_teacher.php');
 ?>
 
 <head>
@@ -16,39 +16,41 @@ require_once('./authen_teacher.php');
       <br>
       <br>
       <div class="card">
-         <div class="card-body">
-            <table class="table table-bordered" id='table'>
-
-               <thead>
-                  <tr>
-                     <th>ExamID</th>
-                     <th>Exam</th>
-                     <th>Topic</th>
-                     <th>Difficulty</th>
-                     <th>Create day</th>
-                     <th>Action</th>
-                  </tr>
-               </thead>
-               <tbody>
-                  <?php
-                  $i = 1;
-                  $query = "SELECT * FROM exam WHERE teacherID = " . $_SESSION['id'] . " order by examID desc";
-                  $records = mysqli_query($conn, $query);
-                  if (mysqli_num_rows($records) > 0) {
-                     while ($data = mysqli_fetch_assoc($records)) { ?>
-                        <tr>
-                           <td><?= $data['examID'] ?></td>
-                           <td><?= $data['exName'] ?></td>
-                           <td><?= $data['topic'] ?></td>
-                           <td><?= $data['diff_level'] ?></td>
-                           <td><?= $data['createDay'] ?></td>
-                           <td><a href="index.php?page=review&id=<?php echo $data['examID'] ?>" class="btn btn-primary">Review</a></td>
-                        </tr>
-                  <?php }
-                  }
-                  ?>
-               </tbody>
-            </table>
+         <div class="card-body shadow p-3 mb-5">
+            <h3 style="margin-bottom:10px" class="card-header bg-primary text-light rounded-top">Quiz list</h3>
+            <div class="table-responsive">
+               <table class="table table-bordered table-striped" id='table' width="100%" cellspacing="0">
+                  <thead class="text-dark bg-light">
+                     <tr>
+                        <th class="th-sm">ExamID</th>
+                        <th class="th-sm">Exam</th>
+                        <th class="th-sm">Topic</th>
+                        <th class="th-sm">Difficulty</th>
+                        <th class="th-sm">Create day</th>
+                        <th class="th-sm">Action</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <?php
+                     $i = 1;
+                     $query = "SELECT * FROM exam WHERE teacherID = " . $_SESSION['id'] . " order by examID desc";
+                     $records = mysqli_query($conn, $query);
+                     if (mysqli_num_rows($records) > 0) {
+                        while ($data = mysqli_fetch_assoc($records)) { ?>
+                           <tr>
+                              <td><?= $data['examID'] ?></td>
+                              <td><?= $data['exName'] ?></td>
+                              <td><?= $data['topic'] ?></td>
+                              <td><?= $data['diff_level'] ?></td>
+                              <td><?= $data['createDay'] ?></td>
+                              <td><a href="index.php?page=review&id=<?php echo $data['examID'] ?>" class="btn btn-primary">Review</a></td>
+                           </tr>
+                     <?php }
+                     }
+                     ?>
+                  </tbody>
+               </table>
+            </div>
          </div>
       </div>
    </div>
@@ -93,6 +95,12 @@ require_once('./authen_teacher.php');
          $('#manage_quiz .modal-title').html('Add New quiz')
          $('#manage_quiz #quiz-frm').get(0).reset()
          $('#manage_quiz').modal('show')
+      })
+      $('#dataTable').dataTable({
+         "lengthMenu": [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"]
+         ]
       })
    })
 </script>

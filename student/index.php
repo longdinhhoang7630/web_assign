@@ -18,6 +18,9 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     <link href="sidebar.css" rel="stylesheet" type="text/css" media="all">
     <link href="myStyle.css" rel="stylesheet" type="text/css" media="all">
     <link href="profile.css" rel="stylesheet" type="text/css" media="all">
@@ -72,7 +75,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
 
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <button type="button" id="sidebarCollapse" class="btn btn-primary">
                         <i class="fas fa-align-left"></i>
                     </button>
 
@@ -105,24 +108,20 @@
                         include 'profile.php';
                         break;
                     case 'quiz':
-                        include 'search_default.php';
+                        include 'listQuiz.php';
                         break;
-                        // case 'do_quiz':
-                        //     include 'do_quiz.php';
-                        //     break;
                     case 'reset':
                         include 'reset-password.php';
                         break;
+                    case 'do_quiz':
+                        include 'do_quiz.php';
+                        break; 
                     default:
                         include 'notfound.php';
                         break;
                 }
             } else {
-                if (isset($_POST['searchword'])) {
-                    include 'quizsearch_process.php';
-                } else {
-                    include 'search_default.php';
-                }
+                include'profile.php';
             }
             ?>
         </div>
