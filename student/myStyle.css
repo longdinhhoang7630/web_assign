@@ -6,9 +6,9 @@ body {
   overflow-y: hidden;
 }
 
-.active {
+/* .active {
   background-color: rgba(9, 173, 105, 0.979);
-}
+} */
 
 .head {
   background-color:rgb(162, 247, 215);

@@ -1,14 +1,29 @@
 <?php
 require_once '../connection.php';
 require_once './authen_student.php';
+$valueToSearch = $_POST['searchword'];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
    if (!empty($valueToSearch)) {
-      $query = "SELECT examID,exName,username,topic,diff_level,exam.createDay FROM exam join account on (accountID = teacherID) WHERE LOWER(exName) LIKE '%" . $valueToSearch . "%' or LOWER(username) LIKE '%" . $valueToSearch . "%' 
+      $query = "SELECT examID,exName,username,topic,diff_level,exam.createDay FROM exam 
+               join account on (accountID = teacherID) 
+               WHERE LOWER(exName) LIKE '%" . $valueToSearch . "%' 
+               or LOWER(username) LIKE '%" . $valueToSearch . "%' 
                or LOWER(topic) LIKE '%" . $valueToSearch . "%' 
                or LOWER(diff_level) LIKE '%" . $valueToSearch . "%' ";
       $records = mysqli_query($conn, $query); // fetch data from database
       if (mysqli_num_rows($records) > 0) { ?>
          <!-- DataTales Example -->
+         <form class="form-inline mr-auto w-100 navbar-search" action="./index.php" method="post">
+            <div class="input-group">
+               <input id="searchword" name="searchword" type="text" style="width:30rem" class="form-control w3-pale-blue border-0 w3-large" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+               <div class="input-group-append">
+                  <button class="btn btn-primary" type="submit">
+                     <i class="fas fa-search fa-sm"></i>
+                  </button>
+               </div>
+            </div>
+         </form>
+         <br>
          <h1 class="h3 mb-2 text-gray-800">Tables</h1>
          <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
             For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
