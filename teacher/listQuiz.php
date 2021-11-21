@@ -87,7 +87,7 @@ require_once('./authen_teacher.php');
 </body>
 <script>
    $(document).ready(function() {
-      $('#table').DataTable();
+      // $('#table').DataTable();
       $('#new_quiz').click(function() {
          $('#msg').html('')
          $('#manage_quiz .modal-title').html('Add New quiz')
