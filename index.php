@@ -21,7 +21,7 @@
 
 <body>
     <?php
-    if (isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === true) {
+    if (isset($_SESSION["loggedin"])) {
         if ($_SESSION['role'] == 'admin') {
             header("location: admin/");
             exit;

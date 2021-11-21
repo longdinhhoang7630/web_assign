@@ -118,11 +118,11 @@
                 }
             } else {
                 include 'quiz_search.php';
-            }
-            if (isset($_POST['searchword'])) {
-                include 'quizsearch_process.php';
-            } else {
-                include 'search_default.php';
+                if (isset($_POST['searchword'])) {
+                    include 'quizsearch_process.php';
+                } else {
+                    include 'search_default.php';
+                }
             }
             ?>
         </div>

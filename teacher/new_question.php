@@ -31,7 +31,7 @@ require_once('./authen_teacher.php');
                   while ($data = mysqli_fetch_assoc($records)) { ?>
                      <li class="list-group-item"><?php echo $data['question'] ?><br>
                         <center>
-                           <button class="btn btn-sm btn-outline-primary edit_question" data-id="<?php echo $data['questID'] ?>" type="button"><i class="fa fa-edit"></i></button>
+                           <button data-toggle="modal" data-target="#manage_question" class="btn btn-sm btn-outline-primary edit_question" data-id="<?php echo $data['questID'] ?>" type="button"><i class="fa fa-edit"></i></button>
                            <button class="btn btn-sm btn-outline-danger remove_question" data-id="<?php echo $data['questID'] ?>" type="button"><i class="fa fa-trash"></i></button>
                         </center>
                      </li>
@@ -56,23 +56,31 @@ require_once('./authen_teacher.php');
                      <div id="msg"></div>
                      <div class="form-group">
                         <label>Question</label>
+                        <input type="hidden" name="qid" value="<?php echo $_GET['id'] ?>" />
+                        <input type="hidden" name="id" />
                         <textarea rows="3" name="questionContent" required class="form-control"></textarea>
                      </div>
                      <label>Options:</label>
                      <div class="form-group">
                         <textarea rows="2" name="ansA" required class="form-control"></textarea>
-                        <span>
-                           <label><input type="radio" name="check" class="is_right" value="A"> <small>Question Answer</small></label>
-                        </span>
+                        <label><input type="radio" name="check" class="is_right" value="A">
+                           <small>Question Answer</small>
+                        </label>
                         <br>
                         <textarea rows="2" name="ansB" required class="form-control"></textarea>
-                        <label><input type="radio" name="check" class="is_right" value="B"> <small>Question Answer</small></label>
+                        <label><input type="radio" name="check" class="is_right" value="B">
+                           <small>Question Answer</small>
+                        </label>
                         <br>
                         <textarea rows="2" name="ansC" required class="form-control"></textarea>
-                        <label><input type="radio" name="check" class="is_right" value="C"> <small>Question Answer</small></label>
+                        <label><input type="radio" name="check" class="is_right" value="C">
+                           <small>Question Answer</small>
+                        </label>
                         <br>
                         <textarea rows="2" name="ansD" required class="form-control"></textarea>
-                        <label><input type="radio" name="check" class="is_right" value="D"> <small>Question Answer</small></label>
+                        <label><input type="radio" name="check" class="is_right" value="D">
+                           <small>Question Answer</small>
+                        </label>
                      </div>
 
                   </div>
@@ -86,11 +94,7 @@ require_once('./authen_teacher.php');
 </body>
 <script>
    $(document).ready(function() {
-      $(".select2").select2({
-         placeholder: "Select here",
-         width: 'resolve'
-      });
-      $('#table').DataTable();
+      // $('#table').DataTable();
       $('#new_question').click(function() {
          $('#msg').html('')
          $('#manage_question .modal-title').html('Add New Question')
@@ -99,23 +103,31 @@ require_once('./authen_teacher.php');
       })
       $('.edit_question').click(function() {
          var id = $(this).attr('data-id')
+         console.log(id)
          $.ajax({
             url: './get_question.php?id=' + id,
             error: err => console.log(err),
             success: function(resp) {
+               console.log(resp)
                if (typeof resp != undefined) {
                   resp = JSON.parse(resp)
-                  $('[name="id"]').val(resp.qdata.id)
-                  $('[name="question"]').val(resp.qdata.question)
-                  Object.keys(resp.odata).map(k => {
-                     var data = resp.odata[k]
-                     $('[name="question_opt[' + k + ']"]').val(data.option_txt);
-                     if (data.is_right == 1)
-                        $('[name="is_right[' + k + ']"]').prop('checked', true);
-                  })
+                  $('[name="id"]').val(resp.questID)
+                  $('[name="questionContent"]').val(resp.question)
+                  $('[name="ansA"]').val(resp.answerA)
+                  $('[name="ansB"]').val(resp.answerB)
+                  $('[name="ansC"]').val(resp.answerC)
+                  $('[name="ansD"]').val(resp.answerD)
+                  if (resp.correctAns == 'A') {
+                     $("input[name=check][value='A']").prop("checked", true)
+                  } else if (resp.correctAns == 'B') {
+                     $("input[name=check][value='B']").prop("checked", true)
+                  } else if (resp.correctAns == 'C') {
+                     $("input[name=check][value='C']").prop("checked", true)
+                  } else {
+                     $("input[name=check][value='D']").prop("checked", true)
+                  }
                   $('#manage_question .modal-title').html('Edit Question')
                   $('#manage_question').modal('show')
-
                }
             }
          })
@@ -127,39 +139,19 @@ require_once('./authen_teacher.php');
             $(this).prop('checked', true);
          })
       })
-      $('.remove_question').click(function() {
-         var id = $(this).attr('data-id')
-         var conf = confirm('Are you sure to delete this data.');
-         if (conf == true) {
-            $.ajax({
-               url: './delete_question.php?id=' + id,
-               error: err => console.log(err),
-               success: function(resp) {
-                  if (resp == true)
-                     location.reload()
-               }
-            })
-         }
-      })
-      // $('#question-frm').submit(function(e) {
-      //    e.preventDefault();
-      //    $.ajax({
-      //       url: './save_question.php',
-      //       method: 'POST',
-      //       data: $(this).serialize(),
-      //       error: err => {
-      //          console.log(err)
-      //          alert('An error occured')
-      //          $('#quiz-frm [name="submit"]').removeAttr('disabled')
-      //          $('#quiz-frm [name="submit"]').html('Save')
-      //       },
-      //       success: function(resp) {
-      //          if (resp == 1) {
-      //             alert('Data successfully saved');
-      //             location.reload()
+      // $('.remove_question').click(function() {
+      //    var id = $(this).attr('data-id')
+      //    var conf = confirm('Are you sure to delete this data.');
+      //    if (conf == true) {
+      //       $.ajax({
+      //          url: './delete_question.php?id=' + id,
+      //          error: err => console.log(err),
+      //          success: function(resp) {
+      //             if (resp == true)
+      //                location.reload()
       //          }
-      //       }
-      //    })
+      //       })
+      //    }
       // })
    })
 </script>
