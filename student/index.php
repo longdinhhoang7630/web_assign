@@ -20,6 +20,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
     <link href="sidebar.css" rel="stylesheet" type="text/css" media="all">
     <link href="myStyle.css" rel="stylesheet" type="text/css" media="all">
+    <link href="profile.css" rel="stylesheet" type="text/css" media="all">
     <link rel="icon" href="../image/logo.svg" sizes="96x96" />
 </head>
 
@@ -83,7 +84,7 @@
                                 <i class="fa fa-chevron-down"></i>
                             </button>
                             <div class="myDropdown-content">
-                                <a href="index.php?page=home#mainpage">
+                                <a href="index.php?page=myProfile">
                                     <i class="fa fa-user"></i> My profile
                                 </a>
                                 <a style="width:auto;" href="index.php?page=reset#id05" onclick="document.getElementById('id05').style.display='block'">
@@ -100,11 +101,11 @@
             <?php
             if (array_key_exists('page', $_GET)) {
                 switch ($_GET['page']) {
-                    case 'home':
-                        include 'home.php';
+                    case 'myProfile':
+                        include 'profile.php';
                         break;
                     case 'quiz':
-                        include 'quiz_search.php';
+                        include 'search_default.php';
                         break;
                         // case 'do_quiz':
                         //     include 'do_quiz.php';
@@ -117,7 +118,6 @@
                         break;
                 }
             } else {
-                include 'quiz_search.php';
                 if (isset($_POST['searchword'])) {
                     include 'quizsearch_process.php';
                 } else {
