@@ -2,6 +2,7 @@
   <i class="fa fa-plus"></i> Add New Teacher
 </a>
 <br>
+<br>
 <?php
 if (isset($_SESSION["error"])) {
   echo "<div style='color:red'>" . $_SESSION["error"] . "</div>";
@@ -12,15 +13,16 @@ if (isset($_SESSION["success"])) {
   unset($_SESSION["success"]);
 }
 ?>
-<div class="card-body">
+<div class="card-body shadow p-3 mb-5">
+  <h3 style="margin-bottom:10px" class="card-header bg-primary text-light rounded-top">Teacher list</h3>
   <div class="table-responsive">
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-      <thead>
+    <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+      <thead class="text-dark bg-light">
         <tr>
-          <th>Account ID</th>
-          <th>Username</th>
-          <th>Email</th>
-          <th>Create Day</th>
+          <th class="th-sm">Account ID</th>
+          <th class="th-sm">Username</th>
+          <th class="th-sm">Email</th>
+          <th class="th-sm">Create Day</th>
         </tr>
       </thead>
       <tbody>
@@ -226,6 +228,15 @@ if (isset($_SESSION["success"])) {
       document.getElementById('inform').innerHTML = 'Password not matching';
     }
   }
+  ////////////////////////////
+  $(document).ready(function() {
+    $('#dataTable').dataTable({
+      "lengthMenu": [
+        [5, 10, 25, 50, -1],
+        [5, 10, 25, 50, "All"]
+      ]
+    });
+  });
 </script>
 
 <?php $conn->close(); ?>

@@ -1,6 +1,6 @@
 <?php
-session_start();
-include 'header.php';
+// session_start();
+// include 'header.php';
 require_once '../connection.php';
 require_once './authen_student.php';
 $quizID = $_GET['id'];
@@ -31,23 +31,6 @@ $quiz = $conn->query("SELECT * FROM exam where examID =" . $quizID . " ")->fetch
          background: #00c4ff3d;
       }
    </style>
-   <div class="wrapper">
-      <!-- Page Content  -->
-      <div id="content">
-         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-               <?php
-               if (isset($_SESSION['loggedin']) && $_SESSION["loggedin"] === true) { ?>
-                  <div class="myDropdown w3-right">
-                     <button class="dropbtn w3-bar-item w3-button">
-                        Hi, <?php echo $_SESSION['role'] . ' ' . $_SESSION['username'] . ' ' ?>
-                     </button>
-                  </div>
-               <?php } ?>
-            </div>
-         </nav>
-      </div>
-   </div>
    <div class="container-fluid admin">
       <div class="col-md-12 alert alert-primary"><?php echo $quiz['exName'] ?></div>
       <br>
