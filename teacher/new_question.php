@@ -1,9 +1,11 @@
 <?php
 // session_start();
 require_once('../connection.php');
-if (isset($_SESSION['testname'])) {
-   $quizname = $_SESSION['testname'];
+if (isset($_SESSION['examID'])) {
+   $exid = $_SESSION['examID'];
    echo "we are here";
+} else {
+   exit;
 }
 require_once('./authen_teacher.php');
 ?>
@@ -34,7 +36,7 @@ require_once('./authen_teacher.php');
             <ul class="list-group">
                <?php
                $query = "SELECT * FROM (question join exam_content on (questID = questionID)) 
-               join exam on (examID = exID) WHERE exName= '$quizname' order by questID asc ";
+               join exam on (examID = exID) WHERE examID= '$exid' order by questID asc ";
                $records = mysqli_query($conn, $query);
                if (mysqli_num_rows($records) > 0) {
                   while ($data = mysqli_fetch_assoc($records)) { ?>
@@ -191,7 +193,6 @@ require_once('./authen_teacher.php');
          })
       })
       $('.remove_exam').click(function() {
-         var id = $(this).attr('data-id')
          var conf = confirm('Are you sure to delete this exam.');
          if (conf == true) {
             $.ajax({
@@ -199,15 +200,14 @@ require_once('./authen_teacher.php');
                error: err => console.log(err),
                success: function(resp) {
                   console.log(resp)
+                  console.log('here')
                   if (resp == 1) {
                      window.alert("Delete exam success")
-                     header("location: index.php?page=listQuiz"); ////still wronbg here
-                     // } else if (resp == 2) {
-                     //    window.alert("Delete exam invalid");
-                     // } else if (resp == 3) {
-                     //    window.alert("3");
+                     window.location.assign("index.php?page=listQuiz"); ////still wronbg here
+                  } else if (resp == 0) {
+                     window.alert("Fail to delete question");
                   } else {
-                     window.alert("Fail to delete exam")
+                     window.alert("????")
                   }
                }
             })
@@ -226,8 +226,12 @@ require_once('./authen_teacher.php');
                      window.alert("Delete question success");
                      location.reload()
 
+                  } else if (resp == 0) {
+                     window.alert("Fail to delete question");
+                     location.reload()
+
                   } else {
-                     window.alert("Fail to delete question")
+                     window.alert("????")
                   }
                }
             })

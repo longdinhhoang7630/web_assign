@@ -9,16 +9,21 @@ function test_input($data)
    $data = htmlspecialchars($data);
    return $data;
 }
+if (isset($_SESSION['examID'])) {
+   $exid = $_SESSION['examID'];
+} else {
+   exit;
+}
 $testnameErr = '';
 $testquestion = $ansA = $ansB = $ansC = $ansD = $correctAns = $examID = '';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['testname'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
    // var_dump($_POST['questionContent']);
    // var_dump($_POST['ansA']);
    // var_dump($_POST['ansB']);
    // var_dump($_POST['ansC']);
    // var_dump($_SESSION['testname']);
-   $examName =  $_SESSION['testname'];
+
    if (
       !empty($_POST['questionContent']) && !empty($_POST['ansA'])
       && !empty($_POST['ansB']) && !empty($_POST['ansC'])
@@ -40,12 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['testname'])) {
             $res = mysqli_query($conn, $query);
             $data = mysqli_fetch_assoc($res);
             $questid = $data['questID'];
-            // take exam
-            $query = "SELECT * FROM exam WHERE exName = '$examName'";
-            $res = mysqli_query($conn, $query);
-            $data = mysqli_fetch_assoc($res);
-            $exid = $data['examID'];
-            $_SESSION['examID'] = $exid;
+            // take exam id
             if (!empty($questid) && !empty($exid)) {
                $sql2 = "INSERT INTO exam_content(exID,questionID) VALUES ('$exid','$questid')";
                if (mysqli_query($conn, $sql2)) {

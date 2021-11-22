@@ -2,7 +2,8 @@
 // session_start();
 require_once('../connection.php');
 require_once('./authen_teacher.php');
-$getID = $_SESSION['id'];
+if (isset($_SESSION['id']))
+   $getID = $_SESSION['id'];
 function test_input($data)
 {
    $data = trim($data);
@@ -26,7 +27,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    if (empty($testnameErr)) {
       $sql = "INSERT INTO exam (teacherID,exName,topic,diff_level) VALUES ('$getID','$testname','$topic','$diff')";
       if (mysqli_query($conn, $sql)) {
-         $_SESSION['testname'] = $testname;
+         // $_SESSION['testname'] = $testname;
+         // take exam id
+         $query = "SELECT * FROM exam WHERE exName = '$testname'";
+         $res = mysqli_query($conn, $query);
+         $data = mysqli_fetch_assoc($res);
+         $_SESSION['examID'] = $data['examID'];
          header("location: index.php?page=new_question");
       } else {
          echo "<script language='javascript'>
