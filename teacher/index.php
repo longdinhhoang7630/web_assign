@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,8 +16,12 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     <link href="sidebar.css" rel="stylesheet" type="text/css" media="all">
     <link href="myStyle.css" rel="stylesheet" type="text/css" media="all">
+    <link href="profile.css" rel="stylesheet" type="text/css" media="all">
     <link rel="icon" href="../image/logo.svg" sizes="96x96" />
 </head>
 
@@ -34,9 +37,6 @@
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="index.php?page=def">Home</a>
-                </li>
-                <li>
                     <a href="index.php?page=listQuiz">Quiz List</a>
                 </li>
                 <li>
@@ -49,7 +49,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
 
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <button type="button" id="sidebarCollapse" class="btn btn-primary">
                         <i class="fas fa-align-left"></i>
                     </button>
 
@@ -61,7 +61,7 @@
                                 <i class="fa fa-angle-down"></i>
                             </button>
                             <div class="myDropdown-content">
-                                <a href="index.php?page=home#mainpage">
+                                <a href="index.php?page=myProfile">
                                     <i class="fa fa-user"></i> My profile
                                 </a>
                                 <a style="width:auto;" href="index.php?page=reset#id05" onclick="document.getElementById('id05').style.display='block'">
@@ -78,8 +78,8 @@
             <?php
             if (array_key_exists('page', $_GET)) {
                 switch ($_GET['page']) {
-                    case 'home':
-                        include 'home.php';
+                    case 'myProfile':
+                        include 'profile.php';
                         break;
                     case 'reset':
                         include 'reset-password.php';
@@ -94,6 +94,8 @@
                         include 'notfound.php';
                         break;
                 }
+            }else{
+                include 'listQuiz.php';
             }
             ?>
         </div>

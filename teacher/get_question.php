@@ -8,3 +8,4 @@ WHERE questID = '$questionid' and exID = '$exid'";
 $res = mysqli_query($conn, $sql);
 $data = mysqli_fetch_assoc($res);
 echo json_encode($data);
+?>

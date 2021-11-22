@@ -48,10 +48,10 @@ $id = $_SESSION['id'];
                               </div>
                               <div class="col-md-8 col-6">
                                  <?php
-                                 $query = "SELECT * FROM admins WHERE adminID = '$id'";
+                                 $query = "SELECT * FROM account WHERE accountID = '$id'";
                                  $res = mysqli_query($conn, $query);
                                  $data = mysqli_fetch_assoc($res);
-                                 echo $data['adminID'];
+                                 echo $data['accountID'];
                                  ?>
                               </div>
                            </div>
@@ -63,7 +63,7 @@ $id = $_SESSION['id'];
                               </div>
                               <div class="col-md-8 col-6">
                                  <?php
-                                 $query = "SELECT * FROM admins WHERE adminID = '$id'";
+                                 $query = "SELECT * FROM account WHERE accountID = '$id'";
                                  $res = mysqli_query($conn, $query);
                                  $data = mysqli_fetch_assoc($res);
                                  echo $data['username'];
@@ -77,7 +77,12 @@ $id = $_SESSION['id'];
                                  <label style="font-weight:bold;">Role</label>
                               </div>
                               <div class="col-md-8 col-6">
-                                Admin
+                                 <?php
+                                 $query = "SELECT * FROM account WHERE accountID = '$id'";
+                                 $res = mysqli_query($conn, $query);
+                                 $data = mysqli_fetch_assoc($res);
+                                 echo $data['role'];
+                                 ?>
                               </div>
                            </div>
                            <hr />
