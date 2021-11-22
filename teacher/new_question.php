@@ -1,7 +1,10 @@
 <?php
 // session_start();
 require_once('../connection.php');
-$quizname = $_SESSION['testname'];
+if (isset($_SESSION['testname'])) {
+   $quizname = $_SESSION['testname'];
+   echo "we are here";
+}
 require_once('./authen_teacher.php');
 ?>
 
@@ -13,10 +16,13 @@ require_once('./authen_teacher.php');
 
    <div class="container-fluid admin">
       <a data-toggle="modal" data-target="#manage_question" class="btn btn-primary bt-sm" id="new_question">
-         <i class="fa fa-plus"></i> Add Question <i class="far fa-save"></i>
+         <i class="fa fa-plus"></i> Add Question
       </a>
-      <a href="./index.php?page=listQuiz" class="btn btn-primary bt-sm" id="saveExam">
-         <i class="far fa-save"></i> Save exam
+      <a href="./index.php?page=listQuiz" class="btn btn-success bt-sm" id="saveExam">
+         <i class="fa fa-save"></i> Save Exam
+      </a>
+      <a class="btn  btn-danger remove_exam" id="deleteExam">
+         <i class="fa fa-trash"></i> Delete Exam
       </a>
       <br>
       <br>
@@ -36,6 +42,7 @@ require_once('./authen_teacher.php');
                         <center>
                            <button data-toggle="modal" data-target="#manage_question" class="btn btn-sm btn-outline-primary edit_question" data-id="<?php echo $data['questID'] ?>" type="button"><i class="fa fa-edit"></i></button>
                            <button class="btn btn-sm btn-outline-danger remove_question" data-id="<?php echo $data['questID'] ?>" type="button"><i class="fa fa-trash"></i></button>
+
                         </center>
                      </li>
                <?php  }
@@ -153,21 +160,25 @@ require_once('./authen_teacher.php');
                $('#quiz-frm [name="submit"]').html('Save')
             },
             success: function(resp) {
+               console.log(resp + "hello")
                if (resp == 1) {
-                  alert('New question added');
+                  alert('New question added')
                   location.reload()
                } else if (resp == 2) {
-                  alert('Fail to add question');
+                  alert('Fail to add question')
                   location.reload()
                } else if (resp == 3) {
-                  alert('Update question success');
+                  alert('Update question success')
                   location.reload()
                } else if (resp == 4) {
-                  alert('Fail to update question');
+                  alert('Fail to update question')
+                  location.reload()
+               } else if (resp == 5) {
+                  alert('Field is empty')
                   location.reload()
                } else {
-                  alert('Field is empty');
-                  location.reload()
+                  alert('Error not found ')
+
                }
             }
          })
@@ -179,20 +190,42 @@ require_once('./authen_teacher.php');
             $(this).prop('checked', true);
          })
       })
-      $('.remove_question').click(function() {
-         console.log("we here")
+      $('.remove_exam').click(function() {
          var id = $(this).attr('data-id')
-         var delay = 3000
-         var conf = confirm('Are you sure to delete this data.');
+         var conf = confirm('Are you sure to delete this exam.');
+         if (conf == true) {
+            $.ajax({
+               url: './delete_exam.php',
+               error: err => console.log(err),
+               success: function(resp) {
+                  console.log(resp)
+                  if (resp == 1) {
+                     window.alert("Delete exam success")
+                     header("location: index.php?page=listQuiz"); ////still wronbg here
+                     // } else if (resp == 2) {
+                     //    window.alert("Delete exam invalid");
+                     // } else if (resp == 3) {
+                     //    window.alert("3");
+                  } else {
+                     window.alert("Fail to delete exam")
+                  }
+               }
+            })
+         }
+      })
+      $('.remove_question').click(function() {
+         var id = $(this).attr('data-id')
+         var conf = confirm('Are you sure to delete this question.');
          if (conf == true) {
             $.ajax({
                url: './delete_question.php?id=' + id,
                error: err => console.log(err),
                success: function(resp) {
                   console.log(resp)
-                  if (resp == true) {
+                  if (resp == 1) {
                      window.alert("Delete question success");
                      location.reload()
+
                   } else {
                      window.alert("Fail to delete question")
                   }

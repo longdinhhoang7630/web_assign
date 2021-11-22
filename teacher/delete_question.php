@@ -21,7 +21,6 @@ if (!empty($data)) {
         $query2 = "DELETE FROM question WHERE questID ='$questionid'";
         if (mysqli_query($conn, $query2)) {
             echo true;
-            
         } else {
             echo false;
         }
