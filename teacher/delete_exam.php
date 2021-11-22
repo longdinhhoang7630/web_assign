@@ -8,7 +8,7 @@ function test_input($data)
     $data = htmlspecialchars($data);
     return $data;
 }
-if (isset($_SESSION['examID']) && isset($_SESSION['examID'])) {
+if (isset($_SESSION['examID']) && isset($_SESSION['id'])) {
     $exid = $_SESSION['examID'];
     $userid = $_SESSION["id"];
 } else {

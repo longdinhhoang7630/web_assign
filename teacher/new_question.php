@@ -3,7 +3,6 @@
 require_once('../connection.php');
 if (isset($_SESSION['examID'])) {
    $exid = $_SESSION['examID'];
-   echo "we are here";
 } else {
    exit;
 }
@@ -20,7 +19,7 @@ require_once('./authen_teacher.php');
       <a data-toggle="modal" data-target="#manage_question" class="btn btn-primary bt-sm" id="new_question">
          <i class="fa fa-plus"></i> Add Question
       </a>
-      <a href="./index.php?page=listQuiz" class="btn btn-success bt-sm" id="saveExam">
+      <a class="btn btn-success bt-sm complete_exam" id="saveExam">
          <i class="fa fa-save"></i> Save Exam
       </a>
       <a class="btn  btn-danger remove_exam" id="deleteExam">
@@ -112,6 +111,23 @@ require_once('./authen_teacher.php');
          $('#manage_question .modal-title').html('Add New Question')
          $('#manage_question #question-frm').get(0).reset()
          $('#manage_question').modal('show')
+      })
+      $('.complete_exam').click(function() {
+         $.ajax({
+            url: './complete_exam.php',
+            error: err => console.log(err),
+            success: function(resp) {
+               if (resp == 1) {
+                  window.alert("Save exam success")
+                  window.location.assign("index.php?page=listQuiz");
+               } else if (resp == 0) {
+                  window.alert("Exam is empty");
+               } else {
+                  window.alert("????")
+               }
+
+            }
+         })
       })
       $('.edit_question').click(function() {
          var id = $(this).attr('data-id')
