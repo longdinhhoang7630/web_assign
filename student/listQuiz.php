@@ -25,14 +25,14 @@ require_once './authen_student.php';
             if ($result->num_rows > 0) {
                while ($data = $result->fetch_assoc()) {
             ?>
-               <tr>
-                  <td><?= $data['exName'] ?></td>
-                  <td><?= $data['username'] ?></td>
-                  <td><?= $data['topic'] ?></td>
-                  <td><?= $data['diff_level'] ?></td>
-                  <td><?= $data['createDay'] ?></td>
-                  <td><a href="index.php?page=do_quiz&id=<?php echo $data['examID'] ?>" class="btn btn-primary">Start now</a></td>
-               </tr>
+                  <tr>
+                     <td><?= $data['exName'] ?></td>
+                     <td><?= $data['username'] ?></td>
+                     <td><?= $data['topic'] ?></td>
+                     <td><?= $data['diff_level'] ?></td>
+                     <td><?= $data['createDay'] ?></td>
+                     <td><a href="index.php?page=do_quiz&id=<?php echo $data['examID'] ?>" class="btn btn-primary">Start now</a></td>
+                  </tr>
             <?php }
             } ?>
          </tbody>
@@ -45,7 +45,12 @@ require_once './authen_student.php';
          "lengthMenu": [
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"]
-         ]
+         ],
+         "aaSorting": [],
+         columnDefs: [{
+            orderable: false,
+            targets: 5
+         }]
       });
    });
 </script>

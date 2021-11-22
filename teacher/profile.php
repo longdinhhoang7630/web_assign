@@ -34,9 +34,9 @@ $id = $_SESSION['id'];
                         <li class="nav-item">
                            <a class="nav-link active" id="basicInfo-tab" data-toggle="tab" href="#basicInfo" role="tab" aria-controls="basicInfo" aria-selected="true">Basic Info</a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                            <a class="nav-link" id="connectedServices-tab" data-toggle="tab" href="#connectedServices" role="tab" aria-controls="connectedServices" aria-selected="false">Connected Services</a>
-                        </li>
+                        </li> -->
                      </ul>
                      <div class="tab-content ml-1" id="myTabContent">
                         <div class="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
@@ -87,9 +87,9 @@ $id = $_SESSION['id'];
                            </div>
                            <hr />
                         </div>
-                        <div class="tab-pane fade" id="connectedServices" role="tabpanel" aria-labelledby="ConnectedServices-tab">
+                        <!-- <div class="tab-pane fade" id="connectedServices" role="tabpanel" aria-labelledby="ConnectedServices-tab">
                            Facebook, Google, Twitter Account that are connected to this account
-                        </div>
+                        </div> -->
                      </div>
                   </div>
                </div>
