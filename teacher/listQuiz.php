@@ -96,11 +96,16 @@ require_once('../connection.php');
          $('#manage_quiz #quiz-frm').get(0).reset()
          $('#manage_quiz').modal('show')
       })
-      $('#dataTable').dataTable({
+      $('#table').dataTable({
          "lengthMenu": [
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"]
-         ]
+         ],
+         "aaSorting": [],
+         columnDefs: [{
+            orderable: false,
+            targets: 5
+         }]
       })
    })
 </script>
