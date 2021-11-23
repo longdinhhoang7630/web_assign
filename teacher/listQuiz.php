@@ -1,6 +1,6 @@
 <?php
 require_once('../connection.php');
-// require_once('./authen_teacher.php');
+require_once('./authen_teacher.php');
 ?>
 
 <head>
@@ -43,7 +43,11 @@ require_once('../connection.php');
                               <td><?= $data['topic'] ?></td>
                               <td><?= $data['diff_level'] ?></td>
                               <td><?= $data['createDay'] ?></td>
-                              <td><a href="index.php?page=review&id=<?php echo $data['examID'] ?>" class="btn btn-primary">Review</a></td>
+                              <td>
+                                 <button class="btn btn-primary view_exam" data-id="<?php echo $data['examID'] ?>" type="button">
+                                    Review &nbsp; <i class="fa fa-file-alt"></i>
+                                 </button>
+                              </td>
                            </tr>
                      <?php }
                      }
@@ -95,6 +99,19 @@ require_once('../connection.php');
          $('#manage_quiz .modal-title').html('Add New quiz')
          $('#manage_quiz #quiz-frm').get(0).reset()
          $('#manage_quiz').modal('show')
+      })
+      $('.view_exam').click(function() {
+         var id = $(this).attr('data-id')
+         console.log(id)
+         $.ajax({
+            url: './view_exam.php?examid=' + id,
+            error: err => console.log(err),
+            success: function(resp) {
+               console.log(resp)
+               window.location.assign("index.php?page=view_exam.php?examid=" + id);
+            }
+         })
+
       })
       $('#table').dataTable({
          "lengthMenu": [

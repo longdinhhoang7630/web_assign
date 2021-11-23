@@ -4,6 +4,9 @@ require_once('../connection.php');
 require_once('./authen_teacher.php');
 if (isset($_SESSION['id']))
    $getID = $_SESSION['id'];
+else {
+   exit;
+}
 function test_input($data)
 {
    $data = trim($data);

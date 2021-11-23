@@ -87,6 +87,9 @@
                     case 'listQuiz':
                         include 'listQuiz.php';
                         break;
+                    case 'view_quiz':
+                        include 'view_quiz.php';
+                        break;
                     case 'new_question':
                         include 'new_question.php';
                         break;
@@ -94,7 +97,7 @@
                         include 'notfound.php';
                         break;
                 }
-            }else{
+            } else {
                 include 'listQuiz.php';
             }
             ?>
