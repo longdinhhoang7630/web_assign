@@ -13,6 +13,12 @@ $studID = $_SESSION['id'];
 // }
 $sql = "INSERT INTO examination (studentID,testID,result) VALUES('$studID','$quizID',-1)";
 $res = mysqli_query($conn, $sql);
+if($res){
+   $qry = "SELECT takeExID FROM examination WHERE studentID = '$studID' and testID='$quizID' and result=-1";
+   $show = mysqli_query($conn, $qry);
+   $data = mysqli_fetch_assoc($show);
+   $_SESSION['takingExamID'] = $data["takeExID"];
+}
 $quiz = $conn->query("SELECT * FROM exam where examID =" . $quizID . " ")->fetch_array();
 ?>
 
@@ -56,16 +62,16 @@ $quiz = $conn->query("SELECT * FROM exam where examID =" . $quizID . " ")->fetch
                            <br>
                            <ul class='list-group mt-4 mb-4'>
                               <li class="answer list-group-item">
-                                 <label><input type="radio" name="answer[<?php echo $i; ?>]" value="<?php echo $data['answerA'] ?>"> <?php echo $data['answerA'] ?></label>
+                                 <label><input type="radio" name="answer[<?php echo $i; ?>]" value="<?php echo $data['answerA'] ?>" required> <?php echo $data['answerA'] ?></label>
                               </li>
                               <li class="answer list-group-item">
-                                 <label><input type="radio" name="answer[<?php echo $i; ?>]" value="<?php echo $data['answerB'] ?>"> <?php echo $data['answerB'] ?></label>
+                                 <label><input type="radio" name="answer[<?php echo $i; ?>]" value="<?php echo $data['answerB'] ?>" required> <?php echo $data['answerB'] ?></label>
                               </li>
                               <li class="answer list-group-item">
-                                 <label><input type="radio" name="answer[<?php echo $i; ?>]" value="<?php echo $data['answerC'] ?>"> <?php echo $data['answerC'] ?></label>
+                                 <label><input type="radio" name="answer[<?php echo $i; ?>]" value="<?php echo $data['answerC'] ?>" required> <?php echo $data['answerC'] ?></label>
                               </li>
                               <li class="answer list-group-item">
-                                 <label><input type="radio" name="answer[<?php echo $i++; ?>]" value="<?php echo $data['answerD'] ?>"> <?php echo $data['answerD'] ?></label>
+                                 <label><input type="radio" name="answer[<?php echo $i++; ?>]" value="<?php echo $data['answerD'] ?>" required> <?php echo $data['answerD'] ?></label>
                               </li>
                            </ul>
                         </li>
