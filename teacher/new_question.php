@@ -145,11 +145,11 @@ require_once('./authen_teacher.php');
                   $('[name="ansB"]').val(resp.answerB)
                   $('[name="ansC"]').val(resp.answerC)
                   $('[name="ansD"]').val(resp.answerD)
-                  if (resp.correctAns == 'A') {
+                  if (resp.correctAns == resp.answerA) {
                      $("input[name=check][value='A']").prop("checked", true)
-                  } else if (resp.correctAns == 'B') {
+                  } else if (resp.correctAns == resp.answerB) {
                      $("input[name=check][value='B']").prop("checked", true)
-                  } else if (resp.correctAns == 'C') {
+                  } else if (resp.correctAns == resp.answerC) {
                      $("input[name=check][value='C']").prop("checked", true)
                   } else {
                      $("input[name=check][value='D']").prop("checked", true)

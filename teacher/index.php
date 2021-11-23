@@ -40,7 +40,7 @@
                     <a href="index.php?page=listQuiz">Quiz List</a>
                 </li>
                 <li>
-                    <a href="index.php?page=quizRecord">Quiz Record</a>
+                    <a href="index.php?page=quiz_record">Quiz Record</a>
                 </li>
             </ul>
         </nav>
@@ -92,6 +92,9 @@
                         break;
                     case 'new_question':
                         include 'new_question.php';
+                        break;
+                    case 'quiz_record':
+                        include 'quiz_record.php';
                         break;
                     default:
                         include 'notfound.php';
