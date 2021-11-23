@@ -44,9 +44,9 @@ require_once('./authen_teacher.php');
                               <td><?= $data['diff_level'] ?></td>
                               <td><?= $data['createDay'] ?></td>
                               <td>
-                                 <button class="btn btn-primary view_exam" data-id="<?php echo $data['examID'] ?>" type="button">
+                                 <a href="index.php?page=view_quiz&examid=<?php echo $data['examID'] ?>" class="btn btn-primary view_exam" type="button">
                                     Review &nbsp; <i class="fa fa-file-alt"></i>
-                                 </button>
+                                 </a>
                               </td>
                            </tr>
                      <?php }
@@ -100,19 +100,19 @@ require_once('./authen_teacher.php');
          $('#manage_quiz #quiz-frm').get(0).reset()
          $('#manage_quiz').modal('show')
       })
-      $('.view_exam').click(function() {
-         var id = $(this).attr('data-id')
-         console.log(id)
-         $.ajax({
-            url: './view_exam.php?examid=' + id,
-            error: err => console.log(err),
-            success: function(resp) {
-               console.log(resp)
-               window.location.assign("index.php?page=view_exam.php?examid=" + id);
-            }
-         })
+      // $('.view_exam').click(function() {
+      //    var id = $(this).attr('data-id')
+      //    console.log(id)
+      //    $.ajax({
+      //       url: './view_exam.php?examid=' + id,
+      //       error: err => console.log(err),
+      //       success: function(resp) {
+      //          console.log(resp)
+      //          window.location.assign("view_exam.php?examid=" + id);
+      //       }
+      //    })
 
-      })
+      // })
       $('#table').dataTable({
          "lengthMenu": [
             [5, 10, 25, 50, -1],

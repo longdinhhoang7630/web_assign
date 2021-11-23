@@ -1,9 +1,10 @@
 <?php
 require_once('../connection.php');
 require_once('./authen_teacher.php');
-if (isset($_GET['examid']) && isset($_SESSION['id'])) {
+if (isset($_GET['examid']) && isset($_SESSION['id']) && isset($_SESSION['username'])) {
     $exid = $_GET['examid'];
     $userid = $_SESSION['id'];
+    $username = $_SESSION["username"];
 } else {
     echo "Not found";
     exit;
@@ -18,31 +19,29 @@ if (!empty($exam)) {
 
     <body>
         <style>
-            li.answer {
+            /* li.answer {
                 cursor: pointer;
             }
 
             li.answer:hover {
-                background: #00c4ff3d;
+                background: rgb(86 255 16 / 55%);
             }
 
             li.answer input:checked {
-                background: #00c4ff3d;
+                background: #28a745;
+            } */
+
+            .true_ans {
+                background: rgb(86 255 16 / 55%);
             }
         </style>
-        <script>
-            $(document).ready(function() {
-                $('.answer').each(function() {
-                    $(this).click(function() {
-                        $(this).find('input[type="radio"]').prop('checked', true)
-                        $(this).css('background', '#00c4ff3d')
-                        $(this).siblings('li').css('background', 'white')
-                    })
-                })
-            })
-        </script>
+
         <div class="container-fluid admin">
-            <div class="col-md-12 alert alert-primary"><?php echo $exam['exName'] ?></div>
+            <div class="col-md-12 alert alert-primary">
+                <?php
+                echo "Teacher: " . strtoupper($username) . " Exam: " . $exam['exName'] . " Topic: " . $exam['topic'] . " Difficulty: " . $exam['diff_level']
+                ?>
+            </div>
             <br>
             <div class="card">
                 <div class="card-body">
@@ -61,22 +60,33 @@ if (!empty($exam)) {
                                         <input type="hidden" name="question_id[<?php echo $data['questID'] ?>]" value="<?php echo $data['questID'] ?>">
                                         <br>
                                         <ul class='list-group mt-4 mb-4'>
-                                            <li class="answer list-group-item">
-                                                <label><input type="radio" name="<?php echo $data['questID'] ?>:answer" value="<?php echo $data['answerA'] ?>"> <?php echo $data['answerA'] ?></label>
+                                            <li class="answer list-group-item <?php echo ($data['correctAns'] == 'A' ? 'true_ans' : ''); ?>">
+                                                <label>
+                                                   A. <?php echo $data['answerA'] ?>
+                                                </label>
                                             </li>
-                                            <li class="answer list-group-item">
-                                                <label><input type="radio" name="<?php echo $data['questID'] ?>:answer" value="<?php echo $data['answerB'] ?>"> <?php echo $data['answerB'] ?></label>
+                                            <li class="answer list-group-item <?php echo ($data['correctAns'] == 'B' ? 'true_ans' : ''); ?> ">
+                                                <label>
+                                                   B. <?php echo $data['answerB'] ?>
+                                                </label>
                                             </li>
-                                            <li class="answer list-group-item">
-                                                <label><input type="radio" name="<?php echo $data['questID'] ?>:answer" value="<?php echo $data['answerC'] ?>"> <?php echo $data['answerC'] ?></label>
+                                            <li class="answer list-group-item <?php echo ($data['correctAns'] == 'C' ? 'true_ans' : ''); ?>">
+                                                <label>
+                                                   C. <?php echo $data['answerC'] ?>
+                                                </label>
                                             </li>
-                                            <li class="answer list-group-item">
-                                                <label><input type="radio" name="<?php echo $data['questID'] ?>:answer" value="<?php echo $data['answerD'] ?>"> <?php echo $data['answerD'] ?></label>
+                                            <li class="answer list-group-item <?php echo ($data['correctAns'] == 'D' ? 'true_ans' : ''); ?>">
+                                                <label>
+                                                   D. <?php echo $data['answerD'] ?>
+
+                                                </label>
                                             </li>
                                         </ul>
                                     </li>
                                 </ul>
-                        <?php }
+                        <?php
+
+                            }
                         } else {
                             echo "No questions for this exam";
                         } ?>
@@ -90,3 +100,14 @@ if (!empty($exam)) {
 
 }
 ?>
+<script>
+    // $(document).ready(function() {
+    //     $('.answer').each(function() {
+    //         $(this).click(function() {
+    //             $(this).find('input[type="radio"]').prop('checked', true)
+    //             $(this).css('background', '#28a745')
+    //             $(this).siblings('li').css('background', 'white')
+    //         })
+    //     })
+    // })
+</script>

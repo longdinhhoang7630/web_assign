@@ -88,7 +88,7 @@
                         include 'listQuiz.php';
                         break;
                     case 'view_quiz':
-                        include 'view_quiz.php';
+                        include 'view_exam.php';
                         break;
                     case 'new_question':
                         include 'new_question.php';
