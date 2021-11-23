@@ -4,7 +4,7 @@
 <?php require_once './authen_student.php'; ?>
 
 <head>
-    <title>My first website</title>
+    <title>Student page</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
