@@ -1,9 +1,10 @@
 <?php
 // session_start();
 require_once('../connection.php');
-if (isset($_SESSION['testname'])) {
-   $quizname = $_SESSION['testname'];
-   echo "we are here";
+if (isset($_SESSION['examID'])) {
+   $exid = $_SESSION['examID'];
+} else {
+   exit;
 }
 require_once('./authen_teacher.php');
 ?>
@@ -18,7 +19,7 @@ require_once('./authen_teacher.php');
       <a data-toggle="modal" data-target="#manage_question" class="btn btn-primary bt-sm" id="new_question">
          <i class="fa fa-plus"></i> Add Question
       </a>
-      <a href="./index.php?page=listQuiz" class="btn btn-success bt-sm" id="saveExam">
+      <a class="btn btn-success bt-sm complete_exam" id="saveExam">
          <i class="fa fa-save"></i> Save Exam
       </a>
       <a class="btn  btn-danger remove_exam" id="deleteExam">
@@ -34,7 +35,7 @@ require_once('./authen_teacher.php');
             <ul class="list-group">
                <?php
                $query = "SELECT * FROM (question join exam_content on (questID = questionID)) 
-               join exam on (examID = exID) WHERE exName= '$quizname' order by questID asc ";
+               join exam on (examID = exID) WHERE examID= '$exid' order by questID asc ";
                $records = mysqli_query($conn, $query);
                if (mysqli_num_rows($records) > 0) {
                   while ($data = mysqli_fetch_assoc($records)) { ?>
@@ -110,6 +111,23 @@ require_once('./authen_teacher.php');
          $('#manage_question .modal-title').html('Add New Question')
          $('#manage_question #question-frm').get(0).reset()
          $('#manage_question').modal('show')
+      })
+      $('.complete_exam').click(function() {
+         $.ajax({
+            url: './complete_exam.php',
+            error: err => console.log(err),
+            success: function(resp) {
+               if (resp == 1) {
+                  window.alert("Save exam success")
+                  window.location.assign("index.php?page=listQuiz");
+               } else if (resp == 0) {
+                  window.alert("Exam is empty");
+               } else {
+                  window.alert("????")
+               }
+
+            }
+         })
       })
       $('.edit_question').click(function() {
          var id = $(this).attr('data-id')
@@ -191,7 +209,6 @@ require_once('./authen_teacher.php');
          })
       })
       $('.remove_exam').click(function() {
-         var id = $(this).attr('data-id')
          var conf = confirm('Are you sure to delete this exam.');
          if (conf == true) {
             $.ajax({
@@ -199,15 +216,14 @@ require_once('./authen_teacher.php');
                error: err => console.log(err),
                success: function(resp) {
                   console.log(resp)
+                  console.log('here')
                   if (resp == 1) {
                      window.alert("Delete exam success")
-                     header("location: index.php?page=listQuiz"); ////still wronbg here
-                     // } else if (resp == 2) {
-                     //    window.alert("Delete exam invalid");
-                     // } else if (resp == 3) {
-                     //    window.alert("3");
+                     window.location.assign("index.php?page=listQuiz"); ////still wronbg here
+                  } else if (resp == 0) {
+                     window.alert("Fail to delete question");
                   } else {
-                     window.alert("Fail to delete exam")
+                     window.alert("????")
                   }
                }
             })
@@ -226,8 +242,12 @@ require_once('./authen_teacher.php');
                      window.alert("Delete question success");
                      location.reload()
 
+                  } else if (resp == 0) {
+                     window.alert("Fail to delete question");
+                     location.reload()
+
                   } else {
-                     window.alert("Fail to delete question")
+                     window.alert("????")
                   }
                }
             })
