@@ -18,6 +18,12 @@ if($res){
    $show = mysqli_query($conn, $qry);
    $data = mysqli_fetch_assoc($show);
    $_SESSION['takingExamID'] = $data["takeExID"];
+   $takeExID = $data["takeExID"];
+   if($show){
+      $updateResult1 = "UPDATE examination SET result=0 WHERE takeExID='$takeExID'";
+      mysqli_query($conn, $updateResult1);
+   }
+   
 }
 $quiz = $conn->query("SELECT * FROM exam where examID =" . $quizID . " ")->fetch_array();
 ?>
@@ -45,7 +51,7 @@ $quiz = $conn->query("SELECT * FROM exam where examID =" . $quizID . " ")->fetch
       <br>
       <div class="card">
          <div class="card-body">
-            <form action="./submit_answer.php" id="answer-sheet" method="post">
+            <form action="index.php?page=sub" id="answer-sheet" method="post">
                <input type="hidden" name="user_id" value="<?php echo $_SESSION['id'] ?>">
                <input type="hidden" name="quiz_id" value="<?php echo $quizID ?>">
                <?php

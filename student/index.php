@@ -115,13 +115,16 @@
                         break;
                     case 'do_quiz':
                         include 'do_quiz.php';
-                        break; 
+                        break;
+                    case 'sub':
+                        include 'submit_answer.php';
+                        break;
                     default:
                         include 'notfound.php';
                         break;
                 }
             } else {
-                include'profile.php';
+                include 'profile.php';
             }
             ?>
         </div>

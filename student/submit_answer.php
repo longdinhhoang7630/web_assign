@@ -1,13 +1,17 @@
 <?php
-session_start();
+// session_start();
 require_once '../connection.php';
 // require_once './authen_student.php';
 $stID = $_SESSION['id'];
 $takeExID = $_SESSION['takingExamID'];
 $array = array();
-$arrayQuestions=array();
+$arrayQuestions = array();
 $arrayCorrectAns = array();
 $arrayStudentAns = array();
+$arrayA = array();
+$arrayB = array();
+$arrayC = array();
+$arrayD = array();
 $score = 0;
 $i = 0;
 if (isset($_SESSION['studExID']) && isset($_SESSION['id'])) {
@@ -20,7 +24,7 @@ if (isset($_SESSION['studExID']) && isset($_SESSION['id'])) {
 // $show = mysqli_query($conn, $qry);
 // $data = mysqli_fetch_assoc($show);
 
-if (isset($_POST['submitAns'])) { 
+if (isset($_POST['submitAns'])) {
    $query = "SELECT * FROM exam_content WHERE exID='$studExID' ";
    $res = mysqli_query($conn, $query);
    if (mysqli_num_rows($res) > 0) {
@@ -40,7 +44,15 @@ if (isset($_POST['submitAns'])) {
          while ($data = mysqli_fetch_assoc($records)) {
             $correctAns = $data['correctAns'];
             $questions = $data['question'];
-            array_push($arrayQuestions,$questions);
+            $resultA = $data['answerA'];
+            $resultB = $data['answerB'];
+            $resultC = $data['answerC'];
+            $resultD = $data['answerD'];
+            array_push($arrayA, $resultA);
+            array_push($arrayB, $resultB);
+            array_push($arrayC, $resultC);
+            array_push($arrayD, $resultD);
+            array_push($arrayQuestions, $questions);
             array_push($arrayCorrectAns, $correctAns);
          }
          $totalQuestion = count($arrayCorrectAns);
@@ -53,16 +65,20 @@ if (isset($_POST['submitAns'])) {
             $studentAns = $row['studentAns'];
             array_push($arrayStudentAns, $studentAns);
          }
-         $totalAnswer=count($arrayStudentAns);
+         $totalAnswer = count($arrayStudentAns);
       }
 
       $queryName = "SELECT exName FROM exam WHERE examID=$studExID";
       $show = mysqli_query($conn, $queryName);
       $getName = mysqli_fetch_assoc($show);
       $examName = $getName['exName'];
-   }?>
+   } ?>
    <div class="col-md-12 alert alert-primary"><?php echo $examName ?></div>
-  <?php for ($x = 0; $x < $totalQuestion; $x++) { ?>
+   <?php for ($x = 0; $x < $totalQuestion; $x++) {
+            if($arrayStudentAns[$x] == $arrayCorrectAns[$x]){
+               $score = $score + 1;
+            }
+      ?>
       <div class="container-fluid admin">
          <br>
          <div class="card">
@@ -70,19 +86,50 @@ if (isset($_POST['submitAns'])) {
                <form id="answer-sheet">
                   <ul class="q-items list-group mt-4 mb-4">
                      <li class="q-field list-group-item">
-                        <?php echo ($x + 1) . ' ' .$arrayQuestions[$x] ?></strong>
-                        <?php if ($arrayStudentAns[$x]!=$arrayCorrectAns[$x]) { ?>
-                           <p><span style="background-color: #FF9C9E"><?=$arrayStudentAns[$x]?></span></p>
-                           <p><span style="background-color: #ADFFB4"><?=$arrayCorrectAns[$x]?></span></p>
-                        <?php } else { ?>
-                           <p><span style="background-color: #ADFFB4"><?=$arrayStudentAns[$x]?></span></p>
-                           <?php $score = $score + 1; ?>
-                        <?php  } ?>
+                        <?php echo ($x + 1) . ' ' . $arrayQuestions[$x] ?></strong>
+                        <ul class='list-group mt-4 mb-4'>
+                           <li class="answer list-group-item">
+                              <label>
+                                 A. <?php echo $arrayA[$x] ?>
+                                 <span style="text-align:right !important" class="text-success"> <?php echo ($arrayA[$x] == $arrayCorrectAns[$x] ? '✔' : ''); ?></span>
+                                 <span style="text-align:right" class=" text-danger"><?php echo ((($arrayCorrectAns[$x] != $arrayStudentAns[$x]) && ($arrayA[$x] == $arrayStudentAns[$x])) ? '✖' : ''); ?></span>
+                              </label>
+                           </li>
+                           <li class="answer list-group-item">
+                              <label>
+                                 B. <?php echo $arrayB[$x] ?>
+                                 <span style="text-align:right" class="text-success"> <?php echo ($arrayB[$x] == $arrayCorrectAns[$x] ? '✔' : ''); ?></span>
+                                 <span style="text-align:right" class="text-danger"><?php echo ((($arrayCorrectAns[$x] != $arrayStudentAns[$x]) && ($arrayB[$x] == $arrayStudentAns[$x])) ? '✖' : ''); ?></span>
+                              </label>
+                           </li>
+                           <li class="answer list-group-item">
+                              <label>
+                                 C. <?php echo $arrayC[$x] ?>
+                                 <span style="text-align:right" class="text-success"> <?php echo ($arrayC[$x] == $arrayCorrectAns[$x] ? '✔' : ''); ?></span>
+                                 <span style="text-align:right" class="text-danger"><?php echo ((($arrayCorrectAns[$x] != $arrayStudentAns[$x]) && ($arrayC[$x] == $arrayStudentAns[$x])) ? '✖' : ''); ?></span>
+                              </label>
+                           </li>
+                           <li class="answer list-group-item">
+                              <label>
+                                 D. <?php echo $arrayD[$x] ?>
+                                 <span style="text-align:right" class="text-success"> <?php echo ($arrayD[$x] == $arrayCorrectAns[$x] ? '✔' : ''); ?></span>
+                                 <span style="text-align:right" class="text-danger"><?php echo ((($arrayCorrectAns[$x] != $arrayStudentAns[$x]) && ($arrayD[$x] == $arrayStudentAns[$x])) ? '✖' : ''); ?></span>
+                              </label>
+                           </li>
+                        </ul>
+                     </li>
                </form>
             </div>
          </div>
       </div>
-   <?php  } 
+<?php }  
+   echo"<br><br>";
+   echo"<div class='card'>";
+   echo "<h3>" .'Your score: ' .$score . '/' . $totalQuestion . "</h3>";
+   echo "</div>";
+   $finalResult = ($score/$totalQuestion)*10;
+   $updateResult="UPDATE examination SET result='$finalResult' WHERE takeExID='$takeExID'";
+   mysqli_query($conn, $updateResult);
 }
 mysqli_close($conn);
 ?>
