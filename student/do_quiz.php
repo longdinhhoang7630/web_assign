@@ -4,12 +4,15 @@
 require_once '../connection.php';
 require_once './authen_student.php';
 $quizID = $_GET['id'];
+$_SESSION['studExID'] = $quizID;
+$studID = $_SESSION['id'];
 // Check if the user is logged in, otherwise redirect to login page
 // if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION['role']!=='student') {
 //    header("location: ../index.php");
 //    exit;
 // }
-
+$sql = "INSERT INTO examination (studentID,testID,result) VALUES('$studID','$quizID',-1)";
+$res = mysqli_query($conn, $sql);
 $quiz = $conn->query("SELECT * FROM exam where examID =" . $quizID . " ")->fetch_array();
 ?>
 
@@ -36,7 +39,7 @@ $quiz = $conn->query("SELECT * FROM exam where examID =" . $quizID . " ")->fetch
       <br>
       <div class="card">
          <div class="card-body">
-            <form action="" id="answer-sheet">
+            <form action="./submit_answer.php" id="answer-sheet" method="post">
                <input type="hidden" name="user_id" value="<?php echo $_SESSION['id'] ?>">
                <input type="hidden" name="quiz_id" value="<?php echo $quizID ?>">
                <?php
@@ -48,21 +51,21 @@ $quiz = $conn->query("SELECT * FROM exam where examID =" . $quizID . " ")->fetch
                ?>
                      <ul class="q-items list-group mt-4 mb-4">
                         <li class="q-field list-group-item">
-                           <strong><?php echo ($i++) . '. '; ?> <?php echo $data['question'] ?></strong>
+                           <strong><?php echo ($i) . '. '; ?> <?php echo $data['question'] ?></strong>
                            <input type="hidden" name="question_id[<?php echo $data['questID'] ?>]" value="<?php echo $data['questID'] ?>">
                            <br>
                            <ul class='list-group mt-4 mb-4'>
                               <li class="answer list-group-item">
-                                 <label><input type="radio" name="<?php echo $data['questID'] ?>:answer" value="<?php echo $data['answerA'] ?>"> <?php echo $data['answerA'] ?></label>
+                                 <label><input type="radio" name="answer[<?php echo $i; ?>]" value="<?php echo $data['answerA'] ?>"> <?php echo $data['answerA'] ?></label>
                               </li>
                               <li class="answer list-group-item">
-                                 <label><input type="radio" name="<?php echo $data['questID'] ?>:answer" value="<?php echo $data['answerB'] ?>"> <?php echo $data['answerB'] ?></label>
+                                 <label><input type="radio" name="answer[<?php echo $i; ?>]" value="<?php echo $data['answerB'] ?>"> <?php echo $data['answerB'] ?></label>
                               </li>
                               <li class="answer list-group-item">
-                                 <label><input type="radio" name="<?php echo $data['questID'] ?>:answer" value="<?php echo $data['answerC'] ?>"> <?php echo $data['answerC'] ?></label>
+                                 <label><input type="radio" name="answer[<?php echo $i; ?>]" value="<?php echo $data['answerC'] ?>"> <?php echo $data['answerC'] ?></label>
                               </li>
                               <li class="answer list-group-item">
-                                 <label><input type="radio" name="<?php echo $data['questID'] ?>:answer" value="<?php echo $data['answerD'] ?>"> <?php echo $data['answerD'] ?></label>
+                                 <label><input type="radio" name="answer[<?php echo $i++; ?>]" value="<?php echo $data['answerD'] ?>"> <?php echo $data['answerD'] ?></label>
                               </li>
                            </ul>
                         </li>
@@ -71,7 +74,7 @@ $quiz = $conn->query("SELECT * FROM exam where examID =" . $quizID . " ")->fetch
                } else {
                   echo "No questions for this exam";
                } ?>
-               <button type="submit" class="btn btn-primary">Submit</button>
+               <input type="submit" name="submitAns" class="btn btn-primary" value="Submit">
             </form>
          </div>
       </div>
