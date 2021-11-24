@@ -75,10 +75,10 @@ if (isset($_POST['submitAns'])) {
    } ?>
    <div class="col-md-12 alert alert-primary"><?php echo $examName ?></div>
    <?php for ($x = 0; $x < $totalQuestion; $x++) {
-            if($arrayStudentAns[$x] == $arrayCorrectAns[$x]){
-               $score = $score + 1;
-            }
-      ?>
+      if ($arrayStudentAns[$x] == $arrayCorrectAns[$x]) {
+         $score = $score + 1;
+      }
+   ?>
       <div class="container-fluid admin">
          <br>
          <div class="card">
@@ -86,35 +86,35 @@ if (isset($_POST['submitAns'])) {
                <form id="answer-sheet">
                   <ul class="q-items list-group mt-4 mb-4">
                      <li class="q-field list-group-item">
-                        <?php echo ($x + 1) . ' ' . $arrayQuestions[$x] ?></strong>
+                        <strong><?php echo ($x + 1) . '.' . $arrayQuestions[$x] ?></strong>
                         <ul class='list-group mt-4 mb-4'>
                            <li class="answer list-group-item">
                               <label>
-                                 A. <?php echo $arrayA[$x] ?>
-                                 <span style="text-align:right !important" class="text-success"> <?php echo ($arrayA[$x] == $arrayCorrectAns[$x] ? '✔' : ''); ?></span>
-                                 <span style="text-align:right" class=" text-danger"><?php echo ((($arrayCorrectAns[$x] != $arrayStudentAns[$x]) && ($arrayA[$x] == $arrayStudentAns[$x])) ? '✖' : ''); ?></span>
+                                 <?php echo $arrayA[$x] ?>
                               </label>
+                              <span style="text-align:right !important" class="text-success"> <?php echo ($arrayA[$x] == $arrayCorrectAns[$x] ? '✔' : ''); ?></span>
+                              <span style="text-align:right" class=" text-danger"><?php echo ((($arrayCorrectAns[$x] != $arrayStudentAns[$x]) && ($arrayA[$x] == $arrayStudentAns[$x])) ? '✖' : ''); ?></span>
                            </li>
                            <li class="answer list-group-item">
                               <label>
-                                 B. <?php echo $arrayB[$x] ?>
-                                 <span style="text-align:right" class="text-success"> <?php echo ($arrayB[$x] == $arrayCorrectAns[$x] ? '✔' : ''); ?></span>
-                                 <span style="text-align:right" class="text-danger"><?php echo ((($arrayCorrectAns[$x] != $arrayStudentAns[$x]) && ($arrayB[$x] == $arrayStudentAns[$x])) ? '✖' : ''); ?></span>
+                                 <?php echo $arrayB[$x] ?>
                               </label>
+                              <span style="text-align:right" class="text-success"> <?php echo ($arrayB[$x] == $arrayCorrectAns[$x] ? '✔' : ''); ?></span>
+                              <span style="text-align:right" class="text-danger"><?php echo ((($arrayCorrectAns[$x] != $arrayStudentAns[$x]) && ($arrayB[$x] == $arrayStudentAns[$x])) ? '✖' : ''); ?></span>
                            </li>
                            <li class="answer list-group-item">
                               <label>
-                                 C. <?php echo $arrayC[$x] ?>
-                                 <span style="text-align:right" class="text-success"> <?php echo ($arrayC[$x] == $arrayCorrectAns[$x] ? '✔' : ''); ?></span>
-                                 <span style="text-align:right" class="text-danger"><?php echo ((($arrayCorrectAns[$x] != $arrayStudentAns[$x]) && ($arrayC[$x] == $arrayStudentAns[$x])) ? '✖' : ''); ?></span>
+                                 <?php echo $arrayC[$x] ?>
                               </label>
+                              <span style="text-align:right" class="text-success"> <?php echo ($arrayC[$x] == $arrayCorrectAns[$x] ? '✔' : ''); ?></span>
+                              <span style="text-align:right" class="text-danger"><?php echo ((($arrayCorrectAns[$x] != $arrayStudentAns[$x]) && ($arrayC[$x] == $arrayStudentAns[$x])) ? '✖' : ''); ?></span>
                            </li>
                            <li class="answer list-group-item">
                               <label>
-                                 D. <?php echo $arrayD[$x] ?>
-                                 <span style="text-align:right" class="text-success"> <?php echo ($arrayD[$x] == $arrayCorrectAns[$x] ? '✔' : ''); ?></span>
-                                 <span style="text-align:right" class="text-danger"><?php echo ((($arrayCorrectAns[$x] != $arrayStudentAns[$x]) && ($arrayD[$x] == $arrayStudentAns[$x])) ? '✖' : ''); ?></span>
+                                 <?php echo $arrayD[$x] ?>
                               </label>
+                              <span style="text-align:right" class="text-success"> <?php echo ($arrayD[$x] == $arrayCorrectAns[$x] ? '✔' : ''); ?></span>
+                              <span style="text-align:right" class="text-danger"><?php echo ((($arrayCorrectAns[$x] != $arrayStudentAns[$x]) && ($arrayD[$x] == $arrayStudentAns[$x])) ? '✖' : ''); ?></span>
                            </li>
                         </ul>
                      </li>
@@ -122,13 +122,13 @@ if (isset($_POST['submitAns'])) {
             </div>
          </div>
       </div>
-<?php }  
-   echo"<br><br>";
-   echo"<div class='card'>";
-   echo "<h3>" .'Your score: ' .$score . '/' . $totalQuestion . "</h3>";
+<?php }
+   echo "<br><br>";
+   echo "<div class='card'>";
+   echo "<h3>" . 'Your score: ' . $score . '/' . $totalQuestion . "</h3>";
    echo "</div>";
-   $finalResult = ($score/$totalQuestion)*10;
-   $updateResult="UPDATE examination SET result='$finalResult' WHERE takeExID='$takeExID'";
+   $finalResult = ($score / $totalQuestion) * 10;
+   $updateResult = "UPDATE examination SET result='$finalResult' WHERE takeExID='$takeExID'";
    mysqli_query($conn, $updateResult);
 }
 mysqli_close($conn);

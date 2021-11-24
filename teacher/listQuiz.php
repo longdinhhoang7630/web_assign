@@ -45,7 +45,7 @@ require_once('./authen_teacher.php');
                               <td><?= $data['createDay'] ?></td>
                               <td>
                                  <a href="index.php?page=view_quiz&examid=<?php echo $data['examID'] ?>" class="btn btn-primary view_exam" type="button">
-                                    Review &nbsp; <i class="fa fa-file-alt"></i>
+                                    Review
                                  </a>
                               </td>
                            </tr>
