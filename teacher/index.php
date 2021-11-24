@@ -37,10 +37,10 @@
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="index.php?page=listQuiz">Quiz List</a>
+                    <a href="index.php?page=exam_list">Exam List</a>
                 </li>
                 <li>
-                    <a href="index.php?page=quiz_record">Quiz Record</a>
+                    <a href="index.php?page=exam_record_list">Exam Record</a>
                 </li>
             </ul>
         </nav>
@@ -84,24 +84,27 @@
                     case 'reset':
                         include 'reset-password.php';
                         break;
-                    case 'listQuiz':
-                        include 'listQuiz.php';
+                    case 'exam_list':
+                        include 'exam_list.php';
                         break;
                     case 'view_quiz':
                         include 'view_exam.php';
                         break;
+                    case 'view_exam_record':
+                        include 'view_exam_record.php';
+                        break;
                     case 'new_question':
                         include 'new_question.php';
                         break;
-                    case 'quiz_record':
-                        include 'quiz_record.php';
+                    case 'exam_record_list':
+                        include 'exam_record_list.php';
                         break;
                     default:
                         include 'notfound.php';
                         break;
                 }
             } else {
-                include 'listQuiz.php';
+                include 'exam_list.php';
             }
             ?>
         </div>

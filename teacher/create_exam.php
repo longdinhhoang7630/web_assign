@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    if (mysqli_num_rows($res) > 0) {
       $testnameErr = "Sorry the exam name already exists. Please try again";
       $_SESSION["error"] = $testnameErr;
-      header("location: index.php?page=listQuiz");
+      header("location: index.php?page=exam_list");
       exit;
    }
    if (empty($testnameErr)) {
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       } else {
          echo "<script language='javascript'>
                   alert('Failed to add new quiz');
-                  window.location='index.php?page=listQuiz';
+                  window.location='index.php?page=exam_list';
                </script>";
          // $_SESSION["error"] = "Failed to add new quiz";
          // header("location: index.php?page=listQuiz");

@@ -4,12 +4,12 @@ require_once('./authen_teacher.php');
 ?>
 
 <head>
-   <title>Quiz List</title>
+   <title>Exam List</title>
 </head>
 
 <body>
    <div class="container-fluid admin">
-      <div class="col-md-12 alert alert-primary">Quiz List</div>
+      <div class="col-md-12 alert alert-primary">Exam List</div>
       <a data-toggle="modal" data-target="#manage_quiz" class="btn btn-primary bt-sm" id="new_quiz">
          <i class="fa fa-plus"></i> Add New
       </a>
@@ -17,7 +17,7 @@ require_once('./authen_teacher.php');
       <br>
       <div class="card">
          <div class="card-body shadow p-3 mb-5">
-            <h3 style="margin-bottom:10px" class="card-header bg-primary text-light rounded-top">Quiz list</h3>
+            <h3 style="margin-bottom:10px" class="card-header bg-primary text-light rounded-top">Exam list</h3>
             <div class="table-responsive">
                <table class="table table-bordered table-striped" id='table' width="100%" cellspacing="0">
                   <thead class="text-dark bg-light">
@@ -45,7 +45,7 @@ require_once('./authen_teacher.php');
                               <td><?= $data['createDay'] ?></td>
                               <td>
                                  <a href="index.php?page=view_quiz&examid=<?php echo $data['examID'] ?>" class="btn btn-primary view_exam" type="button">
-                                    Review
+                                    View
                                  </a>
                               </td>
                            </tr>
@@ -66,7 +66,7 @@ require_once('./authen_teacher.php');
                <h4 class="modal-title" id="myModallabel">Add New quiz</h4>
                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
-            <form method='post' id='quiz-frm' action='./save_quiz.php'>
+            <form method='post' id='quiz-frm' action='./create_exam.php'>
                <div class="modal-body">
                   <div id="msg"></div>
                   <div class="form-group">

@@ -14,7 +14,7 @@ if (isset($_SESSION['id'])) {
 </head>
 
 <div class="card-body shadow p-3 mb-5">
-    <h3 style="margin-bottom:10px" class="card-header bg-primary text-light rounded-top">Quiz list</h3>
+    <h3 style="margin-bottom:10px" class="card-header bg-primary text-light rounded-top">Exam Record List</h3>
     <div class="table-responsive">
         <table class="table table-bordered table-striped" id="recordTable" width="100%" cellspacing="0">
             <thead>
@@ -44,7 +44,7 @@ if (isset($_SESSION['id'])) {
                             <td><?= $data['diff_level'] ?></td>
                             <td><?= $data['testDay'] ?></td>
                             <td><?= $data['result'] ?></td>
-                            <td><a href="index.php?page=do_quiz&id=<?php echo $data['takeExID'] ?>" class="btn btn-primary">View</a></td>
+                            <td><a href="index.php?page=view_exam_record&takeExID=<?php echo $data['takeExID'] ?>" class="btn btn-primary">View</a></td>
                         </tr>
                 <?php }
                 } ?>

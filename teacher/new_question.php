@@ -119,7 +119,7 @@ require_once('./authen_teacher.php');
             success: function(resp) {
                if (resp == 1) {
                   window.alert("Save exam success")
-                  window.location.assign("index.php?page=listQuiz");
+                  window.location.assign("index.php?page=exam_list");
                } else if (resp == 0) {
                   window.alert("Exam is empty");
                } else {
@@ -219,7 +219,7 @@ require_once('./authen_teacher.php');
                   console.log('here')
                   if (resp == 1) {
                      window.alert("Delete exam success")
-                     window.location.assign("index.php?page=listQuiz"); ////still wronbg here
+                     window.location.assign("index.php?page=exam_list"); ////still wronbg here
                   } else if (resp == 0) {
                      window.alert("Fail to delete question");
                   } else {
