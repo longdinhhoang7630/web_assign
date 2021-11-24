@@ -35,7 +35,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $ansB = test_input($_POST['ansB']);
       $ansC = test_input($_POST['ansC']);
       $ansD = test_input($_POST['ansD']);
-      $correctAns = test_input($_POST['check']);
+      $optAns = test_input($_POST['check']);
+      $correctAns = ($optAns == "A" ? $ansA : ($optAns == "B" ? $ansB : ($optAns == "C" ? $ansC : $ansD)));
       if (empty($questid)) { // add question
          $sql = "INSERT INTO question (question,answerA,answerB,answerC,answerD,correctAns) 
       VALUES ('$testquestion','$ansA','$ansB','$ansC','$ansD','$correctAns')";

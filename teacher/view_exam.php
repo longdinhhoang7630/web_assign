@@ -19,18 +19,6 @@ if (!empty($exam)) {
 
     <body>
         <style>
-            /* li.answer {
-                cursor: pointer;
-            }
-
-            li.answer:hover {
-                background: rgb(86 255 16 / 55%);
-            }
-
-            li.answer input:checked {
-                background: #28a745;
-            } */
-
             .true_ans {
                 background: rgb(86 255 16 / 55%);
             }
@@ -38,9 +26,11 @@ if (!empty($exam)) {
 
         <div class="container-fluid admin">
             <div class="col-md-12 alert alert-primary">
-                <?php
-                echo "Teacher: " . strtoupper($username) . " Exam: " . $exam['exName'] . " Topic: " . $exam['topic'] . " Difficulty: " . $exam['diff_level']
-                ?>
+                <strong>
+                    <?php
+                    echo "Teacher: " . ucwords(strtolower($username)) . " Exam: " . $exam['exName'] . " Topic: " . $exam['topic'] . " Difficulty: " . $exam['diff_level']
+                    ?>
+                </strong>
             </div>
             <br>
             <div class="card">
@@ -60,24 +50,24 @@ if (!empty($exam)) {
                                         <input type="hidden" name="question_id[<?php echo $data['questID'] ?>]" value="<?php echo $data['questID'] ?>">
                                         <br>
                                         <ul class='list-group mt-4 mb-4'>
-                                            <li class="answer list-group-item <?php echo ($data['correctAns'] == 'A' ? 'true_ans' : ''); ?>">
+                                            <li class="answer list-group-item <?php echo ($data['correctAns'] == $data['answerA'] ? 'true_ans' : ''); ?>">
                                                 <label>
-                                                   A. <?php echo $data['answerA'] ?>
+                                                    A. <?php echo $data['answerA'] ?>
                                                 </label>
                                             </li>
-                                            <li class="answer list-group-item <?php echo ($data['correctAns'] == 'B' ? 'true_ans' : ''); ?> ">
+                                            <li class="answer list-group-item <?php echo ($data['correctAns'] == $data['answerB'] ? 'true_ans' : ''); ?> ">
                                                 <label>
-                                                   B. <?php echo $data['answerB'] ?>
+                                                    B. <?php echo $data['answerB'] ?>
                                                 </label>
                                             </li>
-                                            <li class="answer list-group-item <?php echo ($data['correctAns'] == 'C' ? 'true_ans' : ''); ?>">
+                                            <li class="answer list-group-item <?php echo ($data['correctAns'] == $data['answerC'] ? 'true_ans' : ''); ?>">
                                                 <label>
-                                                   C. <?php echo $data['answerC'] ?>
+                                                    C. <?php echo $data['answerC'] ?>
                                                 </label>
                                             </li>
-                                            <li class="answer list-group-item <?php echo ($data['correctAns'] == 'D' ? 'true_ans' : ''); ?>">
+                                            <li class="answer list-group-item <?php echo ($data['correctAns'] == $data['answerD'] ? 'true_ans' : ''); ?>">
                                                 <label>
-                                                   D. <?php echo $data['answerD'] ?>
+                                                    D. <?php echo $data['answerD'] ?>
 
                                                 </label>
                                             </li>
@@ -85,12 +75,11 @@ if (!empty($exam)) {
                                     </li>
                                 </ul>
                         <?php
-
                             }
                         } else {
                             echo "No questions for this exam";
                         } ?>
-                        <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+
                     </form>
                 </div>
             </div>
@@ -100,14 +89,3 @@ if (!empty($exam)) {
 
 }
 ?>
-<script>
-    // $(document).ready(function() {
-    //     $('.answer').each(function() {
-    //         $(this).click(function() {
-    //             $(this).find('input[type="radio"]').prop('checked', true)
-    //             $(this).css('background', '#28a745')
-    //             $(this).siblings('li').css('background', 'white')
-    //         })
-    //     })
-    // })
-</script>
