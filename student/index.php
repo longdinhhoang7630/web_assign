@@ -4,7 +4,7 @@
 <?php require_once './authen_student.php'; ?>
 
 <head>
-    <title>My first website</title>
+    <title>Student page</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -115,13 +115,16 @@
                         break;
                     case 'do_quiz':
                         include 'do_quiz.php';
-                        break; 
+                        break;
+                    case 'sub':
+                        include 'submit_answer.php';
+                        break;
                     default:
                         include 'notfound.php';
                         break;
                 }
             } else {
-                include'profile.php';
+                include 'profile.php';
             }
             ?>
         </div>
