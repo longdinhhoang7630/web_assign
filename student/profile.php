@@ -86,6 +86,21 @@ $id = $_SESSION['id'];
                                         </div>
                                     </div>
                                     <hr />
+
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-2 col-5">
+                                            <label style="font-weight:bold;">Email</label>
+                                        </div>
+                                        <div class="col-md-8 col-6">
+                                            <?php
+                                            $query = "SELECT * FROM account WHERE accountID = '$id'";
+                                            $res = mysqli_query($conn, $query);
+                                            $data = mysqli_fetch_assoc($res);
+                                            echo $data['email'];
+                                            ?>
+                                        </div>
+                                    </div>
+                                    <hr />
                                 </div>
                                 <!-- <div class="tab-pane fade" id="connectedServices" role="tabpanel" aria-labelledby="ConnectedServices-tab">
                                     Facebook, Google, Twitter Account that are connected to this account

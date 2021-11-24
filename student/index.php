@@ -43,31 +43,11 @@
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="index.php?page=quiz">Quiz</a>
+                    <a href="index.php?page=quiz">Quiz list</a>
                 </li>
                 <li>
-                    <a href="#">Result</a>
+                    <a href="index.php?page=history">Quiz history</a>
                 </li>
-                <!-- <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a href="#">Page 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 3</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Portfolio</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li> -->
             </ul>
         </nav>
         <!-- Page Content  -->
@@ -118,6 +98,12 @@
                         break;
                     case 'sub':
                         include 'submit_answer.php';
+                        break;
+                    case 'history':
+                        include 'view_record.php';
+                        break;
+                    case 'view_exam':
+                        include 'view_exam.php';
                         break;
                     default:
                         include 'notfound.php';
