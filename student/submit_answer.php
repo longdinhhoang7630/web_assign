@@ -1,9 +1,15 @@
 <?php
-// session_start();
 require_once '../connection.php';
 // require_once './authen_student.php';
-$stID = $_SESSION['id'];
-$takeExID = $_SESSION['takingExamID'];
+if (isset($_SESSION['id']) && isset($_SESSION['takingExamID']) && isset($_SESSION['studExID'])) {
+   $stID = $_SESSION['id'];
+   $takeExID = $_SESSION['takingExamID'];
+   $studExID = $_SESSION['studExID'];
+} else {
+   echo "Not found";
+   exit;
+}
+
 $array = array();
 $arrayQuestions = array();
 $arrayCorrectAns = array();
@@ -14,11 +20,6 @@ $arrayC = array();
 $arrayD = array();
 $score = 0;
 $i = 0;
-if (isset($_SESSION['studExID']) && isset($_SESSION['id'])) {
-   $studExID = $_SESSION['studExID'];
-} else {
-   exit;
-}
 
 // $qry = "SELECT takeExID FROM examination WHERE studentID = '$stID' and testID='$studExID' and result=-1";
 // $show = mysqli_query($conn, $qry);
@@ -130,6 +131,8 @@ if (isset($_POST['submitAns'])) {
    $finalResult = ($score / $totalQuestion) * 10;
    $updateResult = "UPDATE examination SET result='$finalResult' WHERE takeExID='$takeExID'";
    mysqli_query($conn, $updateResult);
+   unset($_SESSION['takingExamID']);
+   unset($_SESSION['studExID']);
 }
 mysqli_close($conn);
 ?>
