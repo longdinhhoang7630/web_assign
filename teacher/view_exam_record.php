@@ -108,8 +108,8 @@ if (!empty($exam)) {
                 <div class="card-body">
                     <div class="row rounded m-1 p-2 alert-success">
                         <?php
-                        $score = round($corr / $i * 10, 2);
-                        echo "<h3 class='col-md-6'>Correct answer: " . $corr . "/" . $i . " </h3><h3 class='col-md-6'>| Score: " . $score .  "</h3>";
+                        $score = round($corr / ($i-1) * 10, 2);
+                        echo "<h3 class='col-md-6'>Correct answer: " . $corr . "/" . $i-1 . " </h3><h3 class='col-md-6'>| Score: " . $score .  "</h3>";
                         ?>
                     </div>
                 </div>
