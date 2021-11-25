@@ -3,9 +3,13 @@
 // include 'header.php';
 require_once '../connection.php';
 require_once './authen_student.php';
-$quizID = $_GET['id'];
-$_SESSION['studExID'] = $quizID;
-$studID = $_SESSION['id'];
+if (isset($_GET['id']) && isset($_SESSION['id'])) {
+   $_SESSION['studExID'] = $quizID = $_GET['id'];
+   $studID = $_SESSION['id'];
+} else {
+   echo "Not found";
+   exit;
+}
 // Check if the user is logged in, otherwise redirect to login page
 // if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION['role']!=='student') {
 //    header("location: ../index.php");
@@ -13,17 +17,16 @@ $studID = $_SESSION['id'];
 // }
 $sql = "INSERT INTO examination (studentID,testID,result) VALUES('$studID','$quizID',-1)";
 $res = mysqli_query($conn, $sql);
-if($res){
+if ($res) {
    $qry = "SELECT takeExID FROM examination WHERE studentID = '$studID' and testID='$quizID' and result=-1";
    $show = mysqli_query($conn, $qry);
    $data = mysqli_fetch_assoc($show);
    $_SESSION['takingExamID'] = $data["takeExID"];
    $takeExID = $data["takeExID"];
-   if($show){
+   if ($show) {
       $updateResult1 = "UPDATE examination SET result=0 WHERE takeExID='$takeExID'";
       mysqli_query($conn, $updateResult1);
    }
-   
 }
 $quiz = $conn->query("SELECT * FROM exam where examID =" . $quizID . " ")->fetch_array();
 ?>
