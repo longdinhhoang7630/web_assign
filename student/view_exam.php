@@ -115,14 +115,15 @@ if (mysqli_num_rows($res) > 0) {
       </div>
    </div>
 <?php } ?>
-   <br>
-   <div class="container-fluid admin">
-      <div class='card'>
-         <h3 class='text-danger'>Your score: <?php echo $score . '/' . $totalQuestion ?> </h3>
-      </div>
+<br>
+<div class="container-fluid admin">
+   <div class='card'>
+      <h3 class='text-danger'>Correct answer: <?php echo $score . '/' . $totalQuestion ?> </h3>
+      <h3 class='text-danger'>Score: <?php echo round(($score / $totalQuestion) * 10, 2); ?> </h3>
    </div>
-   <br>
-   <?php 
-   mysqli_close($conn);
-   ?>
+</div>
+<br>
+<?php
+mysqli_close($conn);
+?>
 <a href="index.php?page=history" class='btn btn-primary'>Back</a>

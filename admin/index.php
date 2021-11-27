@@ -21,6 +21,9 @@ include 'session.php';
    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <link rel="stylesheet" href="https://rawgit.com/gionkunz/chartist-js/master/dist/chartist.min.css">
+   <script src="https://rawgit.com/gionkunz/chartist-js/master/dist/chartist.min.js"></script>
    <link href="sidebar.css" rel="stylesheet" type="text/css" media="all">
    <link href="myStyle.css" rel="stylesheet" type="text/css" media="all">
    <link href="profile.css" rel="stylesheet" type="text/css" media="all">
@@ -42,14 +45,16 @@ include 'session.php';
          </div>
          <ul class="list-unstyled components">
             <li>
-               <a href="index.php?page=teacher">Teacher</a>
-            </li>
-
-            <li>
-               <a href="index.php?page=student">Student</a>
+               <a href="index.php?page=home">Home</a>
             </li>
             <li>
-               <a href="index.php?page=quiz">Quiz</a>
+               <a href="index.php?page=teacher">Teacher list</a>
+            </li>
+            <li>
+               <a href="index.php?page=student">Student list</a>
+            </li>
+            <li>
+               <a href="index.php?page=quiz">Quiz list</a>
             </li>
          </ul>
       </nav>
@@ -91,6 +96,9 @@ include 'session.php';
                case 'myProfile':
                   include 'profile.php';
                   break;
+               case 'home':
+                  include 'home.php';
+                  break;
                case 'teacher':
                   include 'teacher.php';
                   break;
@@ -105,7 +113,7 @@ include 'session.php';
                   break;
             }
          } else {
-            include 'profile.php';
+            include 'home.php';
          }
 
          ?>
