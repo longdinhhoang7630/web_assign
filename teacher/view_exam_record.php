@@ -11,7 +11,6 @@ if (isset($_GET['takeExID']) && isset($_SESSION['id']) && isset($_SESSION['usern
 }
 $exam = $conn->query("SELECT * FROM examination JOIN exam on testID=examID WHERE takeExID = '$takeExID' AND teacherID ='$userid' ")->fetch_assoc();
 if (!empty($exam)) {
-    echo 123;
 ?>
 
     <head>
@@ -50,7 +49,9 @@ if (!empty($exam)) {
                         if (mysqli_num_rows($listQuestion) > 0) {
                             while ($data = mysqli_fetch_assoc($listQuestion)) {
                                 $ans = mysqli_fetch_assoc($listStuAns);
-                                $corr = $data['correctAns'] == $ans['studentAns'] ? $corr + 1 : $corr;
+                                if ($data['correctAns'] == $ans['studentAns']) {
+                                    $corr = $corr + 1;
+                                }
                         ?>
                                 <ul class="q-items list-group mt-4 mb-4">
                                     <li class="q-field list-group-item">
@@ -58,38 +59,33 @@ if (!empty($exam)) {
                                         <input type="hidden" name="question_id[<?php echo $data['questID'] ?>]" value="<?php echo $data['questID'] ?>">
                                         <br>
                                         <ul class='list-group mt-4 mb-4'>
-                                            <li class="answer list-group-item 
-                                            <?php echo ($data['correctAns'] == $data['answerA'] ? 'true_ans' : '');
-                                            echo ($data['correctAns'] != $data['answerA'] && $data['answerA'] == $ans['studentAns'] ? 'wrong_ans' : '');
-                                            ?>">
+                                            <li class="answer list-group-item">
                                                 <label>
-                                                    A. <?php echo $data['answerA'] ?>
+                                                    <?php echo $data['answerA'] ?>
                                                 </label>
+                                                <span> <?php echo ($data['correctAns'] == $data['answerA'] ? '✔' : ''); ?></span>
+                                                <span><?php echo ($data['correctAns'] != $data['answerA'] && $data['answerA'] == $ans['studentAns'] ? '✖' : ''); ?></span>
                                             </li>
-                                            <li class="answer list-group-item 
-                                            <?php echo ($data['correctAns'] == $data['answerB'] ? 'true_ans' : '');
-                                            echo ($data['correctAns'] != $data['answerB'] && $data['answerB'] == $ans['studentAns'] ? 'wrong_ans' : '');
-                                            ?> ">
+                                            <li class="answer list-group-item">
                                                 <label>
-                                                    B. <?php echo $data['answerB'] ?>
+                                                    <?php echo $data['answerB'] ?>
                                                 </label>
+                                                <span> <?php echo ($data['correctAns'] == $data['answerB'] ? '✔' : ''); ?></span>
+                                                <span><?php echo ($data['correctAns'] != $data['answerB'] && $data['answerB'] == $ans['studentAns'] ? '✖' : ''); ?></span>
                                             </li>
-                                            <li class="answer list-group-item 
-                                            <?php echo ($data['correctAns'] == $data['answerC'] ? 'true_ans' : '');
-                                            echo ($data['correctAns'] != $data['answerC'] && $data['answerC'] == $ans['studentAns'] ? 'wrong_ans' : '');
-                                            ?>">
+                                            <li class="answer list-group-item">
                                                 <label>
-                                                    C. <?php echo $data['answerC'] ?>
+                                                    <?php echo $data['answerC'] ?>
                                                 </label>
+                                                <span> <?php echo ($data['correctAns'] == $data['answerC'] ? '✔' : ''); ?></span>
+                                                <span><?php echo ($data['correctAns'] != $data['answerC'] && $data['answerC'] == $ans['studentAns'] ? '✖' : ''); ?></span>
                                             </li>
-                                            <li class="answer list-group-item 
-                                            <?php echo ($data['correctAns'] == $data['answerD'] ? 'true_ans' : '');
-                                            echo ($data['correctAns'] != $data['answerD'] && $data['answerD'] == $ans['studentAns'] ? 'wrong_ans' : '');
-                                            ?>">
+                                            <li class="answer list-group-item">
                                                 <label>
-                                                    D. <?php echo $data['answerD'] ?>
-
+                                                    <?php echo $data['answerD'] ?>
                                                 </label>
+                                                <span> <?php echo ($data['correctAns'] == $data['answerD'] ? '✔' : ''); ?></span>
+                                                <span><?php echo ($data['correctAns'] != $data['answerD'] && $data['answerD'] == $ans['studentAns'] ? '✖' : ''); ?></span>
                                             </li>
                                         </ul>
                                     </li>
@@ -108,8 +104,8 @@ if (!empty($exam)) {
                 <div class="card-body">
                     <div class="row rounded m-1 p-2 alert-success">
                         <?php
-                        $score = round($corr / ($i-1) * 10, 2);
-                        echo "<h3 class='col-md-6'>Correct answer: " . $corr . "/" . $i-1 . " </h3><h3 class='col-md-6'>| Score: " . $score .  "</h3>";
+                        $score = round($corr / ($i - 1) * 10, 2);
+                        echo "<h3 class='col-md-6'>Correct answer: " . $corr . "/" . ($i - 1) . " </h3><h3 class='col-md-6'>| Score: " . $score .  "</h3>";
                         ?>
                     </div>
                 </div>
@@ -123,3 +119,5 @@ if (!empty($exam)) {
     echo "<div class='col-md-12 alert alert-primary'>Record does not exist <div>";
 }
 ?>
+<br>
+<a href="index.php?page=exam_record_list" class='btn btn-primary m-1 p-2'>Back</a>

@@ -111,18 +111,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               if ($role == 'admin') {
 ?>
                 <script language='javascript'>
-                  window.alert('Login successfully, welcome Admin');
+                  // window.alert('Login successfully, welcome Admin');
                   window.location.href = 'admin/';
                 </script>
               <?php
               } elseif ($role == 'teacher') { ?>
                 <script language='javascript'>
-                  window.alert('Login successfully, welcome Teacher');
+                  // window.alert('Login successfully, welcome Teacher');
                   window.location.href = 'teacher/';
                 </script>
               <?php } elseif ($role == "student") { ?>
                 <script language='javascript'>
-                  window.alert('Login successfully, welcome Student');
+                  // window.alert('Login successfully, welcome Student');
                   window.location.href = 'student/';
                 </script>
 <?php }
