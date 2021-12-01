@@ -63,29 +63,29 @@ if (!empty($exam)) {
                                                 <label>
                                                     <?php echo $data['answerA'] ?>
                                                 </label>
-                                                <span> <?php echo ($data['correctAns'] == $data['answerA'] ? '✔' : ''); ?></span>
-                                                <span><?php echo ($data['correctAns'] != $data['answerA'] && $data['answerA'] == $ans['studentAns'] ? '✖' : ''); ?></span>
+                                                <span class="text-success"> <?php echo ($data['correctAns'] == $data['answerA'] ? '✔' : ''); ?></span>
+                                                <span class="text-danger"><?php echo ($data['correctAns'] != $data['answerA'] && $data['answerA'] == $ans['studentAns'] ? '✖' : ''); ?></span>
                                             </li>
                                             <li class="answer list-group-item">
                                                 <label>
                                                     <?php echo $data['answerB'] ?>
                                                 </label>
-                                                <span> <?php echo ($data['correctAns'] == $data['answerB'] ? '✔' : ''); ?></span>
-                                                <span><?php echo ($data['correctAns'] != $data['answerB'] && $data['answerB'] == $ans['studentAns'] ? '✖' : ''); ?></span>
+                                                <span class="text-success"> <?php echo ($data['correctAns'] == $data['answerB'] ? '✔' : ''); ?></span>
+                                                <span class="text-danger"><?php echo ($data['correctAns'] != $data['answerB'] && $data['answerB'] == $ans['studentAns'] ? '✖' : ''); ?></span>
                                             </li>
                                             <li class="answer list-group-item">
                                                 <label>
                                                     <?php echo $data['answerC'] ?>
                                                 </label>
-                                                <span> <?php echo ($data['correctAns'] == $data['answerC'] ? '✔' : ''); ?></span>
-                                                <span><?php echo ($data['correctAns'] != $data['answerC'] && $data['answerC'] == $ans['studentAns'] ? '✖' : ''); ?></span>
+                                                <span class="text-success"> <?php echo ($data['correctAns'] == $data['answerC'] ? '✔' : ''); ?></span>
+                                                <span class="text-danger"><?php echo ($data['correctAns'] != $data['answerC'] && $data['answerC'] == $ans['studentAns'] ? '✖' : ''); ?></span>
                                             </li>
                                             <li class="answer list-group-item">
                                                 <label>
                                                     <?php echo $data['answerD'] ?>
                                                 </label>
-                                                <span> <?php echo ($data['correctAns'] == $data['answerD'] ? '✔' : ''); ?></span>
-                                                <span><?php echo ($data['correctAns'] != $data['answerD'] && $data['answerD'] == $ans['studentAns'] ? '✖' : ''); ?></span>
+                                                <span class="text-success"> <?php echo ($data['correctAns'] == $data['answerD'] ? '✔' : ''); ?></span>
+                                                <span class="text-danger"><?php echo ($data['correctAns'] != $data['answerD'] && $data['answerD'] == $ans['studentAns'] ? '✖' : ''); ?></span>
                                             </li>
                                         </ul>
                                     </li>

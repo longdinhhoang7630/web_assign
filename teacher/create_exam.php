@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $testname = test_input($_POST['testname']);
    $topic = test_input($_POST['topic']);
    $diff = test_input($_POST['diff_level']);
+   $duration = test_input($_POST['duration']);
    $sql = "SELECT exName FROM exam WHERE exName = '$testname'";
    $res = mysqli_query($conn, $sql);
    if (mysqli_num_rows($res) > 0) {
@@ -28,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       exit;
    }
    if (empty($testnameErr)) {
-      $sql = "INSERT INTO exam (teacherID,exName,topic,diff_level) VALUES ('$getID','$testname','$topic','$diff')";
+      $sql = "INSERT INTO exam (teacherID,exName,topic,diff_level,duration) VALUES ('$getID','$testname','$topic','$diff', '$duration')";
       if (mysqli_query($conn, $sql)) {
          // $_SESSION['testname'] = $testname;
          // take exam id
