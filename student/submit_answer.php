@@ -7,6 +7,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['takingExamID']) && isset($_SESSIO
    $studExID = $_SESSION['studExID'];
 } else {
    echo "Not found";
+   var_dump($_SESSION['id']);
+   var_dump($_SESSION['takingExamID']);
+   var_dump($_SESSION['studExID']);
    exit;
 }
 
@@ -137,8 +140,8 @@ if (isset($_POST['submitAns'])) {
 <?php $finalResult = ($score / $totalQuestion) * 10;
    $updateResult = "UPDATE examination SET result='$finalResult' WHERE takeExID='$takeExID'";
    mysqli_query($conn, $updateResult);
-   unset($_SESSION['takingExamID']);
-   unset($_SESSION['studExID']);
+   // unset($_SESSION['takingExamID']);
+   // unset($_SESSION['studExID']);
 }
 mysqli_close($conn);
 ?>
