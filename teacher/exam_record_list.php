@@ -25,13 +25,14 @@ if (isset($_SESSION['id'])) {
                     <th class="th-sm">Topic</th>
                     <th class="th-sm">Difficult</th>
                     <th class="th-sm">Taken Day</th>
+                    <th class="th-sm">Spending Time</th>
                     <th class="th-sm">Score</th>
                     <th class="th-sm">View record</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $sql = "SELECT takeExID,username,exName,topic,diff_level,testDay,result FROM (exam join examination on (testID = examID)) join account on(studentID=accountID) order by takeExID desc";
+                $sql = "SELECT takeExID,username,exName,topic,diff_level,testDay,result,spendTime FROM (exam join examination on (testID = examID)) join account on(studentID=accountID) order by takeExID desc";
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
                     while ($data = $result->fetch_assoc()) {
@@ -43,6 +44,7 @@ if (isset($_SESSION['id'])) {
                             <td><?= $data['topic'] ?></td>
                             <td><?= $data['diff_level'] ?></td>
                             <td><?= $data['testDay'] ?></td>
+                            <td><?= $data['spendTime'] ?> mins</td>
                             <td><?= $data['result'] ?></td>
                             <td><a href="index.php?page=view_exam_record&takeExID=<?php echo $data['takeExID'] ?>" class="btn btn-primary">View</a></td>
                         </tr>
