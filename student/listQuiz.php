@@ -51,7 +51,7 @@ require_once './authen_student.php';
          "aaSorting": [],
          columnDefs: [{
             orderable: false,
-            targets: 5
+            targets: 6
          }]
       });
    });
