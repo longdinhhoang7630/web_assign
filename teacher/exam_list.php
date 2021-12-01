@@ -26,6 +26,7 @@ require_once('./authen_teacher.php');
                         <th class="th-sm">Exam</th>
                         <th class="th-sm">Topic</th>
                         <th class="th-sm">Difficulty</th>
+                        <th class="th-sm">Duration</th>
                         <th class="th-sm">Create day</th>
                         <th class="th-sm">Action</th>
                      </tr>
@@ -42,6 +43,7 @@ require_once('./authen_teacher.php');
                               <td><?= $data['exName'] ?></td>
                               <td><?= $data['topic'] ?></td>
                               <td><?= $data['diff_level'] ?></td>
+                              <td><?= $data['duration'] ?> mins</td>
                               <td><?= $data['createDay'] ?></td>
                               <td>
                                  <a href="index.php?page=view_quiz&examid=<?php echo $data['examID'] ?>" class="btn btn-primary view_exam" type="button">
@@ -79,8 +81,26 @@ require_once('./authen_teacher.php');
                      <input type="text" name="topic" required class="form-control" />
                   </div>
                   <div class="form-group">
+                     <label>Duration</label>
+                     <select id="duration" name="duration" required class="form-control">
+                        <option value="5">5 mins</option>
+                        <option value="10">10 mins</option>
+                        <option value="15">15 mins</option>
+                        <option value="30">30 mins</option>
+                        <option value="60">60 mins</option>
+                        <option value="90">90 mins</option>
+                     </select>
+                  </div>
+                  <div class="form-group">
                      <label>Difficulty</label>
-                     <input type="text" name="diff_level" required class="form-control" />
+                     <select id="diff_level" name="diff_level" required class="form-control">
+                        <option value="A1">A1</option>
+                        <option value="A2">A2</option>
+                        <option value="B1">B1</option>
+                        <option value="B2">B2</option>
+                        <option value="C1">C1</option>
+                        <option value="C2">C2</option>
+                     </select>
                   </div>
                </div>
                <div class="modal-footer">
