@@ -1,8 +1,17 @@
-<?php session_start(); ?>
+<?php session_start();
+function makeUrl($string)
+{
+    $string = trim($string);
+    $string = str_replace(' ', '-', $string);
+    $string = strtolower($string);
+    return $string;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <base href="http://localhost:7070/web_assign/" />
     <title>Quiz system</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -51,11 +60,11 @@
             <i class="fa fa-fw fa-book"></i> Contact
         </a>
 
-        <a style="text-decoration: none;" class="w3-bar-item w3-button w3-padding-16 w3-hover-teal w3-right" onclick="document.getElementById('id01').style.display='block'" href="index.php?page=login#id01" style="width:auto;">
+        <a style="text-decoration: none;" class="w3-bar-item w3-button w3-padding-16 w3-hover-teal w3-right" onclick="document.getElementById('id01').style.display='block'" href="index.php?page=login" style="width:auto;">
             <i class="fa fa-fw fa-sign-in"></i> Login
         </a>
 
-        <a style="text-decoration: none;" class="w3-bar-item w3-button w3-padding-16 w3-hover-teal w3-right" onclick="document.getElementById('id02').style.display='block'" href="index.php?page=register#id02" style="width:auto;">
+        <a style="text-decoration: none;" class="w3-bar-item w3-button w3-padding-16 w3-hover-teal w3-right" onclick="document.getElementById('id02').style.display='block'" href="index.php?page=register" style="width:auto;">
             <i class="fa fa-fw fa-user-plus"></i> Sign up
         </a>
     </div>

@@ -46,7 +46,9 @@ if (isset($_SESSION['id'])) {
                             <td><?= $data['testDay'] ?></td>
                             <td><?= $data['spendTime'] ?> mins</td>
                             <td><?= $data['result'] ?></td>
-                            <td><a href="index.php?page=view_exam_record&takeExID=<?php echo $data['takeExID'] ?>" class="btn btn-primary">View</a></td>
+                            <td>
+                                <a href="exam-record/<?php echo $data['takeExID'] ?>/<?php echo makeUrl($data['exName']) ?>.html" class="btn btn-primary">View</a>
+                            </td>
                         </tr>
                 <?php }
                 } ?>

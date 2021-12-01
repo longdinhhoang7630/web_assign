@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <base href="http://localhost:7070/web_assign/teacher/" />
     <title>Teacher page</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,10 +24,18 @@
     <link href="myStyle.css" rel="stylesheet" type="text/css" media="all">
     <link href="profile.css" rel="stylesheet" type="text/css" media="all">
     <link rel="icon" href="../image/logo.svg" sizes="96x96" />
+
 </head>
 
 <body>
     <?php
+    function makeUrl($string)
+    {
+        $string = trim($string);
+        $string = str_replace(' ', '-', $string);
+        $string = strtolower($string);
+        return $string;
+    }
     require_once('./authen_teacher.php');
     ?>
     <div class="wrapper">
@@ -37,10 +46,10 @@
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="index.php?page=exam_list">Exam List</a>
+                    <a href="exam_list.html">Exam List</a>
                 </li>
                 <li>
-                    <a href="index.php?page=exam_record_list">Exam Record</a>
+                    <a href="exam_record_list.html">Exam Record</a>
                 </li>
             </ul>
         </nav>
@@ -61,10 +70,10 @@
                                 <i class="fa fa-angle-down"></i>
                             </button>
                             <div class="myDropdown-content">
-                                <a href="index.php?page=myProfile">
+                                <a href="myProfile.html">
                                     <i class="fa fa-user"></i> My profile
                                 </a>
-                                <a style="width:auto;" href="index.php?page=reset#id05" onclick="document.getElementById('id05').style.display='block'">
+                                <a style="width:auto;" href="reset-password.html" onclick="document.getElementById('id05').style.display='block'">
                                     <i class="fa fa-lock"></i> Reset password
                                 </a>
                                 <a href="#" data-toggle="modal" data-target="#logoutModal">
@@ -81,7 +90,7 @@
                     case 'myProfile':
                         include 'profile.php';
                         break;
-                    case 'reset':
+                    case 'reset-password':
                         include 'reset-password.php';
                         break;
                     case 'exam_list':
