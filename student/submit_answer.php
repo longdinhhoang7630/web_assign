@@ -75,14 +75,15 @@ if (isset($_POST['submitAns'])) {
       $examName = $getName['exName'];
    } ?>
    <div class="col-md-12 alert alert-primary"><?php echo $examName ?></div>
-   <?php for ($x = 0; $x < $totalQuestion; $x++) {
-      // echo $arrayStudentAns[$x].'/'.$arrayCorrectAns[$x];
-      // echo"<br>";
-      if ($arrayStudentAns[$x] == $arrayCorrectAns[$x]) {
-         $score = $score + 1;
-      }
-   ?>
-      <div class="container-fluid admin">
+   <div class="container-fluid admin">
+      <?php for ($x = 0; $x < $totalQuestion; $x++) {
+         // echo $arrayStudentAns[$x].'/'.$arrayCorrectAns[$x];
+         // echo"<br>";
+         if ($arrayStudentAns[$x] == $arrayCorrectAns[$x]) {
+            $score = $score + 1;
+         }
+      ?>
+
          <div class="card">
             <div class="card-body">
                <form id="answer-sheet">
@@ -123,8 +124,9 @@ if (isset($_POST['submitAns'])) {
                </form>
             </div>
          </div>
-      </div>
-   <?php } ?>
+
+      <?php } ?>
+   </div>
    <br>
    <div class="container-fluid admin">
       <div class='card'>
@@ -132,12 +134,12 @@ if (isset($_POST['submitAns'])) {
       </div>
    </div>
    <br>
-   <?php $finalResult = ($score / $totalQuestion) * 10;
+<?php $finalResult = ($score / $totalQuestion) * 10;
    $updateResult = "UPDATE examination SET result='$finalResult' WHERE takeExID='$takeExID'";
    mysqli_query($conn, $updateResult);
    unset($_SESSION['takingExamID']);
    unset($_SESSION['studExID']);
 }
 mysqli_close($conn);
-   ?>
-   <a href="index.php?page=quiz" class='btn btn-primary'>Back to Quiz List</a>
+?>
+<a href="index.php?page=quiz" class='btn btn-primary'>Back to Quiz List</a>
