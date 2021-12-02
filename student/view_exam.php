@@ -138,4 +138,4 @@ if (mysqli_num_rows($res) > 0) {
 <?php
 mysqli_close($conn);
 ?>
-<a href="index.php?page=history" class='btn btn-primary'>Back</a>
+<a href="quiz_record_list.html" class='btn btn-primary'>Back</a>

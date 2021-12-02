@@ -52,7 +52,7 @@
                     <a href="exam_record_list.html">Exam Record</a>
                 </li>
                 <li>
-                    <a href="index.php?page=student_list">Student list</a>
+                    <a href="student_list.html">Student list</a>
                 </li>
             </ul>
         </nav>

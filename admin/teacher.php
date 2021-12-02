@@ -37,7 +37,7 @@ if (isset($_SESSION["success"])) {
               <td><?= $row['accountID'] ?></td>
               <td><?= $row['username'] ?></td>
               <td><?= $row['email'] ?></td>
-              <td><?= $row['createDay'] ?></td>
+              <td><?= $row['createDAY'] ?></td>
 
             </tr>
         <?php }

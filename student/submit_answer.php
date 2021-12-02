@@ -162,7 +162,7 @@ if (isset($_POST['submitAns'])) {
 }
 mysqli_close($conn);
 ?>
-<a href="index.php?page=quiz" class='btn btn-primary'>Back to Quiz List</a>
+<a href="quiz_list.html" class='btn btn-primary'>Back to Quiz List</a>
 <script>
    window.location.hash = "no-back-button";
    window.location.hash = "Again-No-back-button"; //again because google chrome don't insert first hash into history

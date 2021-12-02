@@ -78,7 +78,7 @@ $duration = $quiz['duration'];
    <br>
    <div class="card">
       <div class="card-body">
-         <form action="index.php?page=sub" id="answer-sheet" method="post">
+         <form action="submit_answer.html" id="answer-sheet" method="post">
             <input type="hidden" name="user_id" value="<?php echo $_SESSION['id'] ?>">
             <input type="hidden" name="quiz_id" value="<?php echo $quizID ?>">
             <?php

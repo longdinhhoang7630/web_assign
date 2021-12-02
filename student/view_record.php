@@ -37,8 +37,7 @@ $studentID = $_SESSION['id'];
                      <td><?= $data['result'] ?></td>
                      <td><?= $data['spendTime'] ?></td>
                      <td>
-                        <a href="index.php?page=view_exam&id=<?php echo $data['examID'] ?>&tid=<?php echo $data['takeExID'] ?>" 
-                           class="btn btn-primary">View exam
+                        <a href="view-record/<?php echo $data['examID'] ?>/<?php echo $data['takeExID'] ?>/<?= makeUrl($data['exName']) ?>.html" class="btn btn-primary">View exam
                         </a>
                      </td>
                   </tr>
