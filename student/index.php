@@ -96,6 +96,7 @@
                         include 'do_quiz.php';
                         echo "<script>                              
                             $('a').on('click', function(e) {
+                                alert('You cannot leave this page while doing test');
                                 return false;
                             });         
                         </script>";

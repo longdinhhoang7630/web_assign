@@ -138,7 +138,7 @@ $duration = $quiz['duration'];
    function f2() {
       if (parseInt(sec) > 0) {
          sec = parseInt(sec) - 1;
-         document.getElementById("showtime").innerHTML = "Your Left Time  is :" + min + " m " + sec + " s";
+         document.getElementById("showtime").innerHTML = "Time remain: " + min + " m " + sec + " s";
          tim = setTimeout("f2()", 1000);
       } else {
          if (parseInt(sec) == 0) {
@@ -151,7 +151,7 @@ $duration = $quiz['duration'];
             } else {
                min = parseInt(min) - 1;
                sec = 59;
-               document.getElementById("showtime").innerHTML = "Your Left Time  is :" + min + " m " + sec + " s";
+               document.getElementById("showtime").innerHTML = "Time remain: " + min + " m " + sec + " s";
                tim = setTimeout("f2()", 1000);
             }
          }
