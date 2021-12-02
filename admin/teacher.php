@@ -65,12 +65,12 @@ if (isset($_SESSION["success"])) {
           </div>
           <div class="form-group">
             <label for="psw">Password</label>
-            <input required type="text" placeholder="Enter Password" id="psw" name="psw" class="form-control" title="Must contain at least 8 characters, an uppercase, an lowercase and a number">
+            <input required type="password" placeholder="Enter Password" id="psw" name="psw" class="form-control" title="Must contain at least 8 characters, an uppercase, an lowercase and a number">
           </div>
           <div class="form-group">
             <label for="psw">Confirm password</label>
             <label class="float-right" id='inform'></label>
-            <input required id="confirm" type="text" name="confirm_password" placeholder="Confirm Password" class="form-control" onkeyup='check();'>
+            <input required id="confirm" type="pasword" name="confirm_password" placeholder="Confirm Password" class="form-control" onkeyup='check();'>
           </div>
           <div class="form-group">
             <label for="e-mail">Email</label>

@@ -10,6 +10,10 @@ require_once('./authen_teacher.php');
 <body>
    <div class="container-fluid admin">
       <div class="col-md-12 alert alert-primary">Exam List</div>
+      <?php if (isset($_SESSION["error"])) {
+         echo "<div style='color:red'>" . $_SESSION["error"] . "</div>";
+         unset($_SESSION["error"]);
+      } ?>
       <a data-toggle="modal" data-target="#manage_quiz" class="btn btn-primary bt-sm" id="new_quiz">
          <i class="fa fa-plus"></i> Add New
       </a>

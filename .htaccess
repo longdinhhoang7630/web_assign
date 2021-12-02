@@ -8,5 +8,8 @@ RewriteRule "^teacher/exam/([0-9]+)/([A-Za-z0-9\W]+).html$" "teacher/index.php?p
 RewriteRule "^teacher/exam-record/([0-9]+)/([A-Za-z0-9\W]+).html$" "teacher/index.php?page=view_exam_record&takeExID=$1&exName=$2" 
 RewriteRule "^teacher/([a-zA-Z0-9_-]+).html$" "teacher/index.php?page=$1" 
 
-RewriteRule "^index/([A-Za-z0-9#]+).html$" "index.php?page=$1"
+RewriteRule "^admin/([a-zA-Z0-9_-]+).html$" "admin/index.php?page=$1" 
+
+RewriteRule "^index/home#([A-Za-z0-9]+).html$" "index.php?page=home#$1"
+RewriteRule "^index/([A-Za-z0-9]+).html$" "index.php?page=$1"
 RewriteRule "index.html" "index.php"

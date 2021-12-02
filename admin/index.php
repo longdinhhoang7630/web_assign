@@ -5,6 +5,7 @@ include 'session.php';
 <html lang="en">
 
 <head>
+   <base href="http://localhost:7070/web_assign/admin/" />
    <title>Admin page</title>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,16 +46,16 @@ include 'session.php';
          </div>
          <ul class="list-unstyled components">
             <li>
-               <a href="index.php?page=home">Home</a>
+               <a href="home.html">Home</a>
             </li>
             <li>
-               <a href="index.php?page=teacher">Teacher list</a>
+               <a href="teacher-list.html">Teacher list</a>
             </li>
             <li>
-               <a href="index.php?page=student">Student list</a>
+               <a href="student-list.html">Student list</a>
             </li>
             <li>
-               <a href="index.php?page=quiz">Quiz list</a>
+               <a href="quiz-list.html">Quiz list</a>
             </li>
          </ul>
       </nav>
@@ -76,10 +77,10 @@ include 'session.php';
                         <i class="fa fa-chevron-down"></i>
                      </button>
                      <div class="myDropdown-content">
-                        <a href="index.php?page=myProfile">
+                        <a href="myProfile.html">
                            <i class="fa fa-user"></i> My profile
                         </a>
-                        <a style="width:auto;" href="index.php?page=reset#id05" onclick="document.getElementById('id05').style.display='block'">
+                        <a style="width:auto;" href="reset-password.html" onclick="document.getElementById('id05').style.display='block'">
                            <i class="fa fa-key"></i> Reset password
                         </a>
                         <a href="#" data-toggle="modal" data-target="#logoutModal">
@@ -99,16 +100,16 @@ include 'session.php';
                case 'home':
                   include 'home.php';
                   break;
-               case 'teacher':
+               case 'teacher-list':
                   include 'teacher.php';
                   break;
-               case 'student':
+               case 'student-list':
                   include 'student.php';
                   break;
-               case 'quiz':
+               case 'quiz-list':
                   include 'quiz.php';
                   break;
-               case 'reset':
+               case 'reset-password':
                   include 'reset-password.php';
                   break;
             }

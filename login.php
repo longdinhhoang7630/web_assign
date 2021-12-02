@@ -58,7 +58,7 @@
           password?</a>
       </label>
       <br>
-      <label>Don't have an account? <a style="color:darkblue" href="index.php?page=register">
+      <label>Don't have an account? <a style="color:darkblue" href="index/register.html">
           Sign up</a>
       </label>
     </div>

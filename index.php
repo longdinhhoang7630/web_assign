@@ -12,7 +12,7 @@ function makeUrl($string)
 
 <head>
     <base href="http://localhost:7070/web_assign/" />
-    <title>Quiz system</title>
+    <title>English with quiz</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -52,7 +52,7 @@ function makeUrl($string)
     </div>
 
     <div class="w3-bar w3-indigo w3-card">
-        <a style="text-decoration: none;" href="index.php?page=home#about" class="w3-bar-item w3-button w3-padding-16 w3-hover-teal">
+        <a style="text-decoration: none;" href="#about" class="w3-bar-item w3-button w3-padding-16 w3-hover-teal">
             <i class="fa fa-fw fa-home"></i> Home
         </a>
 
@@ -60,11 +60,11 @@ function makeUrl($string)
             <i class="fa fa-fw fa-book"></i> Contact
         </a>
 
-        <a style="text-decoration: none;" class="w3-bar-item w3-button w3-padding-16 w3-hover-teal w3-right" onclick="document.getElementById('id01').style.display='block'" href="index.php?page=login" style="width:auto;">
+        <a style="text-decoration: none;" class="w3-bar-item w3-button w3-padding-16 w3-hover-teal w3-right" onclick="document.getElementById('id01').style.display='block'" href="index/login.html" style="width:auto;">
             <i class="fa fa-fw fa-sign-in"></i> Login
         </a>
 
-        <a style="text-decoration: none;" class="w3-bar-item w3-button w3-padding-16 w3-hover-teal w3-right" onclick="document.getElementById('id02').style.display='block'" href="index.php?page=register" style="width:auto;">
+        <a style="text-decoration: none;" class="w3-bar-item w3-button w3-padding-16 w3-hover-teal w3-right" onclick="document.getElementById('id02').style.display='block'" href="index/register.html" style="width:auto;">
             <i class="fa fa-fw fa-user-plus"></i> Sign up
         </a>
     </div>
