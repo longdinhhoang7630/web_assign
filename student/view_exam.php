@@ -23,6 +23,14 @@ if (isset($_SESSION['studExID']) && isset($_SESSION['id'])) {
    exit;
 }
 
+$getSpendTime = "SELECT * FROM examination WHERE testID='$quizID' and takeExID = '$takeExamID' and studentID='$studID'";
+$ketqua = mysqli_query($conn, $getSpendTime);
+if (mysqli_num_rows($ketqua) > 0) {
+   $f = mysqli_fetch_assoc($ketqua);
+   $spTime = $f["spendTime"];
+}
+echo "<span> Spend Time: " . $spTime . "</span>";
+
 $query = "SELECT * FROM exam_content WHERE exID='$studExID' ";
 $res = mysqli_query($conn, $query);
 if (mysqli_num_rows($res) > 0) {
@@ -78,32 +86,32 @@ if (mysqli_num_rows($res) > 0) {
             <form id="answer-sheet">
                <ul class="q-items list-group mt-4 mb-4">
                   <li class="q-field list-group-item">
-                     <strong><?php echo ($x + 1) . '.' . $arrayQuestions[$x] ?></strong>
+                     <strong><?php echo ($x + 1) . '.' . $arrayQuestions[$x] ?><?php if ($arrayStudentAns[$x] == 'none') echo "<span class='text-danger'>" . " You didn't answer this question" . "</span>"; ?></strong>
                      <ul class='list-group mt-4 mb-4'>
                         <li class="answer list-group-item">
                            <label>
-                              <?php echo $arrayA[$x] ?>
+                              A. <?php echo $arrayA[$x] ?>
                            </label>
                            <span style="text-align:right !important" class="text-success"> <?php echo ($arrayA[$x] == $arrayCorrectAns[$x] ? '✔' : ''); ?></span>
                            <span style="text-align:right" class=" text-danger"><?php echo ((($arrayCorrectAns[$x] != $arrayStudentAns[$x]) && ($arrayA[$x] == $arrayStudentAns[$x])) ? '✖' : ''); ?></span>
                         </li>
                         <li class="answer list-group-item">
                            <label>
-                              <?php echo $arrayB[$x] ?>
+                              B. <?php echo $arrayB[$x] ?>
                            </label>
                            <span style="text-align:right" class="text-success"> <?php echo ($arrayB[$x] == $arrayCorrectAns[$x] ? '✔' : ''); ?></span>
                            <span style="text-align:right" class="text-danger"><?php echo ((($arrayCorrectAns[$x] != $arrayStudentAns[$x]) && ($arrayB[$x] == $arrayStudentAns[$x])) ? '✖' : ''); ?></span>
                         </li>
                         <li class="answer list-group-item">
                            <label>
-                              <?php echo $arrayC[$x] ?>
+                              C. <?php echo $arrayC[$x] ?>
                            </label>
                            <span style="text-align:right" class="text-success"> <?php echo ($arrayC[$x] == $arrayCorrectAns[$x] ? '✔' : ''); ?></span>
                            <span style="text-align:right" class="text-danger"><?php echo ((($arrayCorrectAns[$x] != $arrayStudentAns[$x]) && ($arrayC[$x] == $arrayStudentAns[$x])) ? '✖' : ''); ?></span>
                         </li>
                         <li class="answer list-group-item">
                            <label>
-                              <?php echo $arrayD[$x] ?>
+                              D. <?php echo $arrayD[$x] ?>
                            </label>
                            <span style="text-align:right" class="text-success"> <?php echo ($arrayD[$x] == $arrayCorrectAns[$x] ? '✔' : ''); ?></span>
                            <span style="text-align:right" class="text-danger"><?php echo ((($arrayCorrectAns[$x] != $arrayStudentAns[$x]) && ($arrayD[$x] == $arrayStudentAns[$x])) ? '✖' : ''); ?></span>
@@ -118,8 +126,12 @@ if (mysqli_num_rows($res) > 0) {
 <br>
 <div class="container-fluid admin">
    <div class='card'>
-      <h3 class='text-danger'>Correct answer: <?php echo $score . '/' . $totalQuestion ?> </h3>
-      <h3 class='text-danger'>Score: <?php echo round(($score / $totalQuestion) * 10, 2); ?> </h3>
+      <div class="card-body">
+         <div class="row rounded m-1 p-2 alert-success">
+            <?php echo "<h3 class='text-danger col-md-6'>Correct Answer:" . $score . '/' . $totalQuestion . "</h3>
+            <h3 class='text-danger col-md-6'>|Score: " . round(($score / $totalQuestion) * 10, 2) . "</h3>" ?>
+         </div>
+      </div>
    </div>
 </div>
 <br>

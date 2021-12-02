@@ -58,10 +58,9 @@
                     <button type="button" id="sidebarCollapse" class="btn btn-primary">
                         <i class="fas fa-align-left"></i>
                     </button>
-
                     <?php
                     if (isset($_SESSION['loggedin']) && $_SESSION["loggedin"] === true) { ?>
-                        <div class="myDropdown w3-right">
+                        <div class="myDropdown w3-right" style="display:hidden">
                             <button class="dropbtn w3-bar-item w3-button">
                                 Hi, <?php echo $_SESSION['role'] . ' ' . $_SESSION['username'] . ' ' ?>
                                 <i class="fa fa-chevron-down"></i>
@@ -78,7 +77,7 @@
                                 </a>
                             </div>
                         </div>
-                    <?php } ?>
+                    <?php }  ?>
                 </div>
             </nav>
             <?php
@@ -95,6 +94,11 @@
                         break;
                     case 'do_quiz':
                         include 'do_quiz.php';
+                        echo "<script>                              
+                            $('a').on('click', function(e) {
+                                return false;
+                            });         
+                        </script>";
                         break;
                     case 'sub':
                         include 'submit_answer.php';

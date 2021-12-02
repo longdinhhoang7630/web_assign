@@ -9,6 +9,7 @@
                     <th class="th-sm">Exam Name</th>
                     <th class="th-sm">Topic</th>
                     <th class="th-sm">Dificulty</th>
+                    <th class="th-sm">Duration</th>
                     <th class="th-sm">Create Day</th>
                 </tr>
             </thead>
@@ -26,6 +27,7 @@
                             <td><?= $row['exName'] ?></td>
                             <td><?= $row['topic'] ?></td>
                             <td><?= $row['diff_level'] ?></td>
+                            <td><?= $row['duration'] ?> mins</td>
                             <td><?= $row['createDay'] ?></td>
                         </tr>
                 <?php }

@@ -35,9 +35,10 @@ $studentID = $_SESSION['id'];
                      <td><?= $data['diff_level'] ?></td>
                      <td><?= $data['testDay'] ?></td>
                      <td><?= $data['result'] ?></td>
-                     <td><?= $data['spendTime'] ?> mins</td>
+                     <td><?= $data['spendTime'] ?></td>
                      <td>
-                        <a href="index.php?page=view_exam&id=<?php echo $data['examID'] ?>&tid=<?php echo $data['takeExID'] ?>" class="btn btn-primary">View exam
+                        <a href="index.php?page=view_exam&id=<?php echo $data['examID'] ?>&tid=<?php echo $data['takeExID'] ?>" 
+                           class="btn btn-primary">View exam
                         </a>
                      </td>
                   </tr>

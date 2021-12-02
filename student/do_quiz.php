@@ -10,12 +10,8 @@ if (isset($_GET['id']) && isset($_SESSION['id'])) {
    echo "Not found";
    exit;
 }
-// Check if the user is logged in, otherwise redirect to login page
-// if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION['role']!=='student') {
-//    header("location: ../index.php");
-//    exit;
-// }
-$sql = "INSERT INTO examination (studentID,testID,result) VALUES('$studID','$quizID',-1)";
+
+$sql = "INSERT INTO examination (studentID,testID,result,spendTime) VALUES('$studID','$quizID',-1,0)";
 $res = mysqli_query($conn, $sql);
 if ($res) {
    $qry = "SELECT takeExID FROM examination WHERE studentID = '$studID' and testID='$quizID' and result=-1";
@@ -28,6 +24,9 @@ if ($res) {
       mysqli_query($conn, $updateResult1);
    }
 }
+
+
+
 $quiz = $conn->query("SELECT * FROM exam where examID =" . $quizID . " ")->fetch_array();
 $duration = $quiz['duration'];
 // echo $duration;
@@ -61,7 +60,7 @@ $duration = $quiz['duration'];
             </tr>
             <tr>
                <td>
-                  <div id="showtime">hello</div>
+                  <div id="showtime" class="text-danger"></div>
                </td>
             </tr>
             <tr>
@@ -96,16 +95,16 @@ $duration = $quiz['duration'];
                         <br>
                         <ul class='list-group mt-4 mb-4'>
                            <li class="answer list-group-item">
-                              <label><input type="radio" name="answer[<?php echo $i; ?>]" value="<?php echo $data['answerA'] ?>" > <?php echo $data['answerA'] ?></label>
+                              <label><input type="radio" name="answer[<?php echo $i; ?>]" value="<?php echo $data['answerA'] ?>"> <?php echo $data['answerA'] ?></label>
                            </li>
                            <li class="answer list-group-item">
-                              <label><input type="radio" name="answer[<?php echo $i; ?>]" value="<?php echo $data['answerB'] ?>" > <?php echo $data['answerB'] ?></label>
+                              <label><input type="radio" name="answer[<?php echo $i; ?>]" value="<?php echo $data['answerB'] ?>"> <?php echo $data['answerB'] ?></label>
                            </li>
                            <li class="answer list-group-item">
-                              <label><input type="radio" name="answer[<?php echo $i; ?>]" value="<?php echo $data['answerC'] ?>" > <?php echo $data['answerC'] ?></label>
+                              <label><input type="radio" name="answer[<?php echo $i; ?>]" value="<?php echo $data['answerC'] ?>"> <?php echo $data['answerC'] ?></label>
                            </li>
                            <li class="answer list-group-item">
-                              <label><input type="radio" name="answer[<?php echo $i++; ?>]" value="<?php echo $data['answerD'] ?>" > <?php echo $data['answerD'] ?></label>
+                              <label><input type="radio" name="answer[<?php echo $i++; ?>]" value="<?php echo $data['answerD'] ?>"> <?php echo $data['answerD'] ?></label>
                            </li>
                         </ul>
                      </li>
@@ -114,7 +113,7 @@ $duration = $quiz['duration'];
             } else {
                echo "No questions for this exam";
             } ?>
-            <input type="submit" name="submitAns" class="btn btn-primary" value="Submit">
+            <input type="submit" name="submitAns" class="btn btn-primary subAns" onclick="f1()" value="Submit">
          </form>
       </div>
    </div>
@@ -131,47 +130,64 @@ $duration = $quiz['duration'];
       })
    })
 
-   var min;
-   $(document).on('click', '.startNow', function() {
-      const urlString = window.location.search;
-      const paramSearch = new URLSearchParams(urlString);
-      const pid = paramSearch.get('id');
-      console.log(id)
-      $.ajax({
-         url: "duration.php",
-         method: "POST",
-         data: {
-            id: pid
-         },
-         success: function(res) {
-            f2(res);
-            var min = res;
-            console.log(res)
-         }
-      });
-   });
-
    var tim;
    var sec = 01;
+   var duration = "<?php echo $duration ?>";
+   var min = "<?php echo $duration ?>";
 
-   function f2(min) {
+   function f2() {
       if (parseInt(sec) > 0) {
          sec = parseInt(sec) - 1;
-         document.getElementById("showtime").innerHTML = "Your Left Time  is :" + min + " Minutes :" + sec + " Seconds";
-         tim = setTimeout("f2(min)", 1000);
+         document.getElementById("showtime").innerHTML = "Your Left Time  is :" + min + " m " + sec + " s";
+         tim = setTimeout("f2()", 1000);
       } else {
          if (parseInt(sec) == 0) {
-            min = parseInt(min) - 1;
+
             if (parseInt(min) == 0) {
                clearTimeout(tim);
-               location.href = "index.php";
+               $(document).ready(function() {
+                  $('.subAns').click();
+               });
             } else {
+               min = parseInt(min) - 1;
                sec = 59;
-               document.getElementById("showtime").innerHTML = "Your Left Time  is :" + min + " Minutes ," + sec + " Seconds";
-               tim = setTimeout("f2(min)", 1000);
+               document.getElementById("showtime").innerHTML = "Your Left Time  is :" + min + " m " + sec + " s";
+               tim = setTimeout("f2()", 1000);
             }
          }
-
       }
    }
+   var minDone = 0;
+   var secDone = 0;
+
+   function f1() {
+      if (sec == 0) {
+         minDone = duration - min;
+         secDone = 0;
+      } else {
+         minDone = duration - min - 1;
+         secDone = 60 - sec;
+      }
+      console.log('abc');
+
+      document.cookie = "myMin = " + minDone;
+      document.cookie = "mySec = " + secDone;
+   }
+
+   window.location.hash = "no-back-button";
+   window.location.hash = "Again-No-back-button"; //again because google chrome don't insert first hash into history
+   window.onhashchange = function() {
+      window.location.hash = "no-back-button";
+   }
+
+   function disableF5(e) {
+      if ((e.which || e.keyCode) == 116 || (e.which || e.keyCode) == 82) e.preventDefault();
+   };
+
+   $(document).ready(function() {
+      $(document).on("keydown", disableF5);
+   });
+
+  
+   
 </script>
