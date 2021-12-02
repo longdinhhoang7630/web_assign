@@ -187,7 +187,4 @@ $duration = $quiz['duration'];
    $(document).ready(function() {
       $(document).on("keydown", disableF5);
    });
-
-  
-   
 </script>

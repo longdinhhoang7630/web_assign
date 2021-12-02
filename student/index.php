@@ -98,7 +98,7 @@
                             $('a').on('click', function(e) {
                                 alert('You cannot leave this page while doing test');
                                 return false;
-                            });         
+                            });        
                         </script>";
                         break;
                     case 'sub':
