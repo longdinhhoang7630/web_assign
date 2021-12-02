@@ -44,7 +44,7 @@ if (isset($_SESSION['id'])) {
                             <td><?= $data['topic'] ?></td>
                             <td><?= $data['diff_level'] ?></td>
                             <td><?= $data['testDay'] ?></td>
-                            <td><?= $data['spendTime'] ?> mins</td>
+                            <td><?= $data['spendTime'] ?></td>
                             <td><?= $data['result'] ?></td>
                             <td>
                                 <a href="exam-record/<?php echo $data['takeExID'] ?>/<?php echo makeUrl($data['exName']) ?>.html" class="btn btn-primary">View</a>
@@ -66,7 +66,7 @@ if (isset($_SESSION['id'])) {
             "aaSorting": [],
             columnDefs: [{
                 orderable: false,
-                targets: 7
+                targets: 8
             }]
         });
     });

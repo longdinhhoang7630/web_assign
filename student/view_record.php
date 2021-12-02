@@ -17,6 +17,7 @@ $studentID = $_SESSION['id'];
                <th class="th-sm">Difficulty</th>
                <th class="th-sm">Test day</th>
                <th class="th-sm">Score</th>
+               <th class="th-sm">Spent Time</th>
                <th class="th-sm">Action</th>
             </tr>
          </thead>
@@ -34,8 +35,9 @@ $studentID = $_SESSION['id'];
                      <td><?= $data['diff_level'] ?></td>
                      <td><?= $data['testDay'] ?></td>
                      <td><?= $data['result'] ?></td>
+                     <td><?= $data['spendTime'] ?></td>
                      <td>
-                        <a href="index.php?page=view_exam&id=<?php echo $data['examID']?>&tid=<?php echo $data['takeExID']?>"
+                        <a href="index.php?page=view_exam&id=<?php echo $data['examID'] ?>&tid=<?php echo $data['takeExID'] ?>" 
                            class="btn btn-primary">View exam
                         </a>
                      </td>
@@ -56,7 +58,7 @@ $studentID = $_SESSION['id'];
          "aaSorting": [],
          columnDefs: [{
             orderable: false,
-            targets: 6
+            targets: 7
          }]
       });
    });
