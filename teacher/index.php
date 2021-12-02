@@ -42,9 +42,6 @@
                 <li>
                     <a href="index.php?page=exam_record_list">Exam Record</a>
                 </li>
-                <li>
-                    <a href="index.php?page=student_list">Student list</a>
-                </li>
             </ul>
         </nav>
         <!-- Page Content  -->
@@ -101,9 +98,6 @@
                         break;
                     case 'exam_record_list':
                         include 'exam_record_list.php';
-                        break;
-                    case 'student_list':
-                        include 'student_list.php';
                         break;
                     default:
                         include 'notfound.php';
