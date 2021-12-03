@@ -27,6 +27,13 @@
 
 <body>
     <?php
+    function makeUrl($string)
+    {
+        $string = trim($string);
+        $string = str_replace(' ', '-', $string);
+        $string = strtolower($string);
+        return $string;
+    }
     require_once('./authen_teacher.php');
     ?>
     <div class="wrapper">
@@ -37,10 +44,13 @@
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="index.php?page=exam_list">Exam List</a>
+                    <a href="exam_list.html">Exam List</a>
                 </li>
                 <li>
-                    <a href="index.php?page=exam_record_list">Exam Record</a>
+                    <a href="exam_record_list.html">Exam Record</a>
+                </li>
+                <li>
+                    <a href="student_list.html">Student list</a>
                 </li>
             </ul>
         </nav>
@@ -61,10 +71,10 @@
                                 <i class="fa fa-angle-down"></i>
                             </button>
                             <div class="myDropdown-content">
-                                <a href="index.php?page=myProfile">
+                                <a href="myProfile.html">
                                     <i class="fa fa-user"></i> My profile
                                 </a>
-                                <a style="width:auto;" href="index.php?page=reset#id05" onclick="document.getElementById('id05').style.display='block'">
+                                <a style="width:auto;" href="reset-password.html" onclick="document.getElementById('id05').style.display='block'">
                                     <i class="fa fa-lock"></i> Reset password
                                 </a>
                                 <a href="#" data-toggle="modal" data-target="#logoutModal">
@@ -98,6 +108,9 @@
                         break;
                     case 'exam_record_list':
                         include 'exam_record_list.php';
+                        break;
+                    case 'student_list':
+                        include 'student_list.php';
                         break;
                     default:
                         include 'notfound.php';
