@@ -128,8 +128,8 @@ if (mysqli_num_rows($res) > 0) {
    <div class='card'>
       <div class="card-body">
          <div class="row rounded m-1 p-2 alert-success">
-            <?php echo "<h3 class='text-danger col-md-6'>Correct Answer: " . $score . '/' . $totalQuestion . "</h3>
-            <h3 class='text-danger col-md-6'>|Score: " . round(($score / $totalQuestion) * 10, 2) . "</h3>" ?>
+            <?php echo "<h3 class='text-primary col-md-6'>Correct Answer: " . $score . '/' . $totalQuestion . "</h3>
+            <h3 class='text-primary col-md-6'>|Score: " . round(($score / $totalQuestion) * 10, 2) . "</h3>" ?>
          </div>
       </div>
    </div>
