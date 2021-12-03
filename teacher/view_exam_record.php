@@ -29,10 +29,10 @@ if (!empty($exam)) {
         </style>
 
         <div class="container-fluid admin">
-            <div class="col-md-12 alert alert-primary">
+            <div class="row rounded m-1 p-2 alert alert-primary">
                 <strong>
                     <?php
-                    echo "Teacher: " . ucwords(strtolower($username)) . " Exam: " . $exam['exName'] . " Topic: " . $exam['topic'] . " Difficulty: " . $exam['diff_level']
+                    echo "<span class='col-md-2'>Exam: " . $exam['exName'] .  " </span><span class='col-md-3'> Spent time: " . $exam['spendTime'] .  "</span>";
                     ?>
                 </strong>
             </div>
@@ -46,7 +46,7 @@ if (!empty($exam)) {
                         $listStuAns = $conn->query("SELECT * FROM exhistory WHERE takenExID = $takeExID");
                         $i = 1;
                         $corr = 0;
-                        if (mysqli_num_rows($listQuestion) > 0) {
+                        if (mysqli_num_rows($listQuestion) > 0 && mysqli_num_rows($listStuAns) > 0) {
                             while ($data = mysqli_fetch_assoc($listQuestion)) {
                                 $ans = mysqli_fetch_assoc($listStuAns);
                                 if ($data['correctAns'] == $ans['studentAns']) {
@@ -93,7 +93,8 @@ if (!empty($exam)) {
                         <?php
                             }
                         } else {
-                            echo "No questions for this exam";
+                            echo "Student not doing this exam";
+                            exit;
                         } ?>
 
                     </form>

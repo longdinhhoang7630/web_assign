@@ -32,13 +32,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_POST["oldPass"])) {
     $oldErr = "Please enter your old password";
     $_SESSION["error"] = $oldErr;
-    header("location: index.php?page=reset#id05");
+    header("location: reset-password.html");
     exit;
   } else {
     if (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/", $oldpass)) {
       $passErr = "Invalid old password format";
       $_SESSION["error"] = $oldErr;
-      header("location: index.php?page=reset#id05");
+      header("location: reset-password.html");
       exit;
     }
   }
@@ -47,18 +47,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_POST["psw"])) {
     $passErr = "Please enter your new password";
     $_SESSION["error"] = $passErr;
-    header("location: index.php?page=reset#id05");
+    header("location: reset-password.html");
     exit;
   } elseif (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/", $pass)) {
     $passErr = "Invalid new password format";
     $_SESSION["error"] = $passErr;
-    header("location: index.php?page=reset#id05");
+    header("location: reset-password.html");
     exit;
   } else {
     if (empty($oldErr) && ($oldpass == $pass)) {
       $passErr = "New password must not be old password";
       $_SESSION["error"] = $passErr;
-      header("location: index.php?page=reset#id05");
+      header("location: reset-password.html");
       exit;
     }
   }
@@ -67,14 +67,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_POST["confirm_password"])) {
     $confirm_password_err = "Please confirm your new password";
     $_SESSION["error"] = $confirm_password_err;
-    header("location: index.php?page=reset#id05");
+    header("location: reset-password.html");
     exit;
   } else {
     $confirm_pass = trim($_POST["confirm_password"]);
     if (empty($passErr) && ($pass != $confirm_pass)) {
       $confirm_password_err = "Password did not match";
       $_SESSION["error"] = $confirm_password_err;
-      header("location: index.php?page=reset#id05");
+      header("location: reset-password.html");
       exit;
     }
   }
@@ -96,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Password updated successfully. Destroy the session, and redirect to login page
         echo "<script language='javascript'>
                         alert('Update password successfully. Please login again');
-                        window.location='../index.php?page=login#id01';
+                        window.location='../index/login.html';
                      </script>";
         // $_SESSION["success"] = "Update new password successfully";
         // header("location: index.php?page=reset#id05");

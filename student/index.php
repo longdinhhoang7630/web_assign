@@ -4,6 +4,7 @@
 <?php require_once './authen_student.php'; ?>
 
 <head>
+    <base href="http://localhost:7070/web_assign/student/" />
     <title>Student page</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,10 +30,18 @@
 
 <body>
     <?php
+    function makeUrl($string)
+    {
+        $string = trim($string);
+        $string = str_replace(' ', '-', $string);
+        $string = strtolower($string);
+        return $string;
+    }
     if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION['role'] !== 'student') {
-        header("location: ../index.php");
+        header("location: ../index.html");
         exit;
     }
+
     ?>
     <div class="wrapper">
         <!-- Sidebar  -->
@@ -43,10 +52,10 @@
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="index.php?page=quiz">Quiz list</a>
+                    <a href="quiz_list.html">Quiz list</a>
                 </li>
                 <li>
-                    <a href="index.php?page=history">Quiz history</a>
+                    <a href="quiz_record_list.html">Quiz history</a>
                 </li>
             </ul>
         </nav>
@@ -66,10 +75,10 @@
                                 <i class="fa fa-chevron-down"></i>
                             </button>
                             <div class="myDropdown-content">
-                                <a href="index.php?page=myProfile">
+                                <a href="myProfile.html">
                                     <i class="fa fa-user"></i> My profile
                                 </a>
-                                <a style="width:auto;" href="index.php?page=reset#id05" onclick="document.getElementById('id05').style.display='block'">
+                                <a style="width:auto;" href="reset-password.html" onclick="document.getElementById('id05').style.display='block'">
                                     <i class="fa fa-lock"></i> Reset password
                                 </a>
                                 <a href="#" data-toggle="modal" data-target="#logoutModal">
@@ -86,10 +95,10 @@
                     case 'myProfile':
                         include 'profile.php';
                         break;
-                    case 'quiz':
+                    case 'quiz_list':
                         include 'listQuiz.php';
                         break;
-                    case 'reset':
+                    case 'reset-password':
                         include 'reset-password.php';
                         break;
                     case 'do_quiz':
@@ -101,10 +110,10 @@
                             });        
                         </script>";
                         break;
-                    case 'sub':
+                    case 'submit_answer':
                         include 'submit_answer.php';
                         break;
-                    case 'history':
+                    case 'quiz_record_list':
                         include 'view_record.php';
                         break;
                     case 'view_exam':
@@ -115,7 +124,7 @@
                         break;
                 }
             } else {
-                include 'profile.php';
+                include 'listQuiz.php';
             }
             ?>
         </div>

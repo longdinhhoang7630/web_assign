@@ -40,7 +40,7 @@
 
       <input class="lo btn-primary" type="submit" name="submit1" value="Sign up">
       <label>
-        <p>Already have an account? <a style="color:darkblue" href="index.php?page=login#id01">
+        <p>Already have an account? <a style="color:darkblue" href="index/login.html">
             Login</a>.</p>
       </label>
     </div>

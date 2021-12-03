@@ -34,8 +34,7 @@ require_once './authen_student.php';
                      <td><?= $data['createDay'] ?></td>
                      <td><?= $data['duration'] ?> mins</td>
                      <td>
-                        <a href="index.php?page=do_quiz&id=<?php echo $data['examID'] ?>" 
-                           data-id=<?php echo $data['examID'] ?> class="btn btn-primary startNow">
+                        <a href="do-exam/<?php echo $data['examID'] ?>/<?php echo makeUrl($data['exName']) ?>.html" data-id=<?php echo $data['examID'] ?> class="btn btn-primary startNow">
                            Start now
                         </a>
                      </td>

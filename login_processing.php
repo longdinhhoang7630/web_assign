@@ -32,12 +32,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_POST["username"])) {
     $usernameErr = "Please enter your username";
     $_SESSION["error"] = $usernameErr;
-    header("location: index.php?page=login#id01");
+    header("location: index/login.html");
     exit;
   } elseif (!preg_match("/^[a-zA-Z0-9_]*$/", $username)) {
     $usernameErr = "Invalid username format";
     $_SESSION["error"] = $usernameErr;
-    header("location: index.php?page=login#id01");
+    header("location: index/login.html");
     exit;
   } else {
     $username = trim($_POST["username"]);
@@ -46,12 +46,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_POST["psw"])) {
     $passErr = "Please enter your password";
     $_SESSION["error"] = $passErr;
-    header("location: index.php?page=login#id01");
+    header("location: index/login.html");
     exit;
   } elseif (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/", test_input($_POST["psw"]))) {
     $passErr = "Invalid password format";
     $_SESSION["error"] = $passErr;
-    header("location: index.php?page=login#id01");
+    header("location: index/login.html");
     exit;
   } else {
     $pass = trim($_POST["psw"]);
@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   } else {
     $roleErr = "Role not exist";
     $_SESSION["error"] = $roleErr;
-    header("location: index.php?page=login#id01");
+    header("location: index/login.html");
     exit;
   }
 
@@ -130,7 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               // Password is not valid, display a generic error message
               $loginErr = "Wrong password. Please try again";
               $_SESSION["error"] = $loginErr;
-              header("location: index.php?page=login#id01");
+              header("location: index/login.html");
               exit;
             }
           }
@@ -138,7 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           // Username doesn't exist, display a generic error message
           $loginErr = "This username doesn't exist. Please try again";
           $_SESSION["error"] = $loginErr;
-          header("location: index.php?page=login#id01");
+          header("location: index/login.html");
           exit;
         }
       } else {
@@ -157,7 +157,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //    document.location='index.php?page=login#id01';
     // </script>";
     $_SESSION["error"] = "Login failed. Please try again";
-    header("location: index.php?page=login#id01");
+    header("location: index/login.html");
     exit;
   }
   mysqli_close($conn);

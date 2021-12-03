@@ -8,8 +8,12 @@ require_once('./authen_teacher.php');
 </head>
 
 <body>
-   <div class="container-fluid admin">
+   <div class="container-fluid">
       <div class="col-md-12 alert alert-primary">Exam List</div>
+      <?php if (isset($_SESSION["error"])) {
+         echo "<div style='color:red'>" . $_SESSION["error"] . "</div>";
+         unset($_SESSION["error"]);
+      } ?>
       <a data-toggle="modal" data-target="#manage_quiz" class="btn btn-primary bt-sm" id="new_quiz">
          <i class="fa fa-plus"></i> Add New
       </a>
@@ -46,7 +50,7 @@ require_once('./authen_teacher.php');
                               <td><?= $data['duration'] ?> mins</td>
                               <td><?= $data['createDay'] ?></td>
                               <td>
-                                 <a href="index.php?page=view_quiz&examid=<?php echo $data['examID'] ?>" class="btn btn-primary view_exam" type="button">
+                                 <a href="exam/<?php echo $data['examID'] ?>/<?php echo makeUrl($data['exName']) ?>.html" class="btn btn-primary view_exam" type="button">
                                     View
                                  </a>
                               </td>

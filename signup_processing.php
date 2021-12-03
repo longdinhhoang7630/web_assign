@@ -19,14 +19,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_POST["username"])) {
     $usernameErr = "Please enter your username";
     $_SESSION["error"] = $usernameErr;
-    header("location: index.php?page=register#id02");
+    header("location: index/register.html");
     exit;
   }else {
     // check if username only contains letters and number 0->9 and uderscore
     if(!preg_match("/^[a-zA-Z0-9_]*$/",$username)) {
       $usernameErr = "Invalid username format";
       $_SESSION["error"] = $usernameErr;
-      header("location: index.php?page=register#id02");
+      header("location: index/register.html");
       exit;
     }
   }
@@ -34,13 +34,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_POST["email"])) {
     $emailErr = "Please enter your email";
     $_SESSION["error"] = $emailErr;
-    header("location: index.php?page=register#id02");
+    header("location: index/register.html");
     exit;
   }else {
     if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
       $emailErr = "Invalid email format";
       $_SESSION["error"] = $emailErr;
-      header("location: index.php?page=register#id02");
+      header("location: index/register.html");
       exit;
     }
   }
@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   {
     $emailErr = "Sorry the email already exists. Please try again";
     $_SESSION["error"] = $emailErr;
-    header("location: index.php?page=register#id02");
+    header("location: index/register.html");
     exit;
   }
 
@@ -59,13 +59,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if(empty($_POST["psw"])){
     $passErr = "Please enter your password";
     $_SESSION["error"] = $passErr;
-    header("location: index.php?page=register#id02");
+    header("location: index/register.html");
     exit;
   }else{
     if(!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/",$pass)){
       $passErr = "Invalid password format";
       $_SESSION["error"] = $passErr;
-      header("location: index.php?page=register#id02");
+      header("location: index/register.html");
       exit;
     }
   }
@@ -74,14 +74,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $confirm_password_err = "Please confirm password";  
     $passErr = "Invalid password format";
     $_SESSION["error"] = $confirm_password_err;
-    header("location: index.php?page=register#id02");
+    header("location: index/register.html");
     exit;
   } else{
      $confirm_pass = trim($_POST["confirm_password"]);
     if(empty($passErr) && ($pass != $confirm_pass)){
       $confirm_password_err = "Password did not match";
       $_SESSION["error"] = $confirm_password_err;
-      header("location: index.php?page=register#id02");
+      header("location: index/register.html");
       exit;
     }
   }
@@ -97,12 +97,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       //       window.location='index.php?page=login#id01';
       // </script>";
       $_SESSION["success"] = "Sign up successfully. You can login now";
-      header("location: index.php?page=register#id02");
+      header("location: index/register.html");
       exit;
     }
     }else{
       $_SESSION["success"] = "Sign up failed";
-      header("location: index.php?page=register#id02");
+      header("location: index/register.html");
       exit;
   }
   mysqli_close($conn);

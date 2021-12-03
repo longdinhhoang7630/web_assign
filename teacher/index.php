@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <base href="http://localhost:7070/web_assign/teacher/" />
     <title>Teacher page</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,6 +24,7 @@
     <link href="myStyle.css" rel="stylesheet" type="text/css" media="all">
     <link href="profile.css" rel="stylesheet" type="text/css" media="all">
     <link rel="icon" href="../image/logo.svg" sizes="96x96" />
+
 </head>
 
 <body>
@@ -91,7 +93,7 @@
                     case 'myProfile':
                         include 'profile.php';
                         break;
-                    case 'reset':
+                    case 'reset-password':
                         include 'reset-password.php';
                         break;
                     case 'exam_list':

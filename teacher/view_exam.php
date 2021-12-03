@@ -25,10 +25,12 @@ if (!empty($exam)) {
         </style>
 
         <div class="container-fluid admin">
-            <div class="col-md-12 alert alert-primary">
+            <div class="row rounded m-1 p-2 alert alert-primary">
                 <strong>
                     <?php
-                    echo "Teacher: " . ucwords(strtolower($username)) . " Exam: " . $exam['exName'] . " Topic: " . $exam['topic'] . " Difficulty: " . $exam['diff_level']
+                    echo "<span class='col-md-2'>Exam: " . $exam['exName'] .  " </span><span class='col-md-3'> Spent time: " . $exam['duration']  .  " mins</span>"
+                        .  " </span><span class='col-md-3'> Topic: " . $exam['topic']  .  "</span>"
+                        .  " </span><span class='col-md-3'> Difficulty: " . $exam['diff_level']  .  "</span>";
                     ?>
                 </strong>
             </div>
