@@ -114,7 +114,7 @@ include 'session.php';
                   break;
             }
          } else {
-            include 'home.php';
+            include 'profile.php';
          }
 
          ?>

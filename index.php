@@ -13,8 +13,17 @@ function makeUrl($string)
 <head>
     <base href="http://localhost:7070/web_assign/" />
     <title>English with quiz</title>
+    <meta name="author" content="web_group">
+    <meta name="description" content="English quiz system for people who want to improve their English skill">
+    <meta name="keywords" content="english quiz, english exam, improve your english skill, test your engilsh level ">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta for address -->
+    <meta name="geo.region" content="VN" />
+    <meta name="geo.placename" content="District 10" />
+    <meta name="geo.position" content="10.773309;106.659604" />
+    <meta name="ICBM" content="10.773309, 106.659604" />
+    <!-- meta end -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">

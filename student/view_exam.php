@@ -29,7 +29,7 @@ if (mysqli_num_rows($ketqua) > 0) {
    $f = mysqli_fetch_assoc($ketqua);
    $spTime = $f["spendTime"];
 }
-echo "<span> Spend Time: " . $spTime . "</span>";
+
 
 $query = "SELECT * FROM exam_content WHERE exID='$studExID' ";
 $res = mysqli_query($conn, $query);
@@ -66,7 +66,11 @@ if (mysqli_num_rows($res) > 0) {
          $studentAns = $row['studentAns'];
          array_push($arrayStudentAns, $studentAns);
       }
+      echo "<span> Spend Time: " . $spTime . "</span>";
       $totalAnswer = count($arrayStudentAns);
+   } else {
+      echo "\nStudent not doing this exam";
+      exit;
    }
 
    $queryName = "SELECT exName FROM exam WHERE examID=$studExID";
